@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="AtsEx.Setup.Views.ConfirmPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AtsEx.Setup.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="236" d:DesignWidth="736">
+    <UserControl.Resources>
+        <ResourceDictionary Source="General.xaml"/>
+    </UserControl.Resources>
+    <DockPanel LastChildFill="False">
+        <TextBlock DockPanel.Dock="Top" Text="BVE Trainsim 6 の場所:"/>
+        <TextBlock DockPanel.Dock="Top" Margin="16 4" Text="{Binding Bve6Path.Value}"/>
+        <TextBlock DockPanel.Dock="Top" Margin="0 16 0 0" Text="BVE Trainsim 5 の場所:"/>
+        <TextBlock DockPanel.Dock="Top" Margin="16 4" Text="{Binding Bve5Path.Value}"/>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource NavigationButton}"/>
+            </StackPanel.Resources>
+            <Button Content="&lt; 戻る" Command="{Binding GoBackCommand}"/>
+            <Button Content="インストールを開始" Command="{Binding BeginInstallCommand}"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

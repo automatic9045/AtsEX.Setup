@@ -1,0 +1,99 @@
+﻿<Window x:Class="AtsEx.Setup.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:interactivity="clr-namespace:Reactive.Bindings.Interactivity;assembly=ReactiveProperty.WPF"
+        xmlns:local="clr-namespace:AtsEx.Setup.Views"
+        xmlns:vm="clr-namespace:AtsEx.Setup.ViewModels"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="AtsEX セットアップウィザード" Height="450" Width="800"
+        ResizeMode="CanMinimize" Closing="OnClosing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="General.xaml"/>
+                <ResourceDictionary>
+                    <sys:Double x:Key="CaptionHeight">40</sys:Double>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome CaptionHeight="{StaticResource CaptionHeight}" UseAeroCaptionButtons="False"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    <Grid>
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Orientation="Horizontal" Height="{StaticResource CaptionHeight}"
+                    WindowChrome.IsHitTestVisibleInChrome="True">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="Width" Value="{StaticResource CaptionHeight}"/>
+                    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+                    <Setter Property="FontFamily" Value="Yu Gothic"/>
+                    <Setter Property="FontSize" Value="20"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="－" Command="{Binding MinimizeCommand}"/>
+            <Button Content="×" Command="{Binding CloseCommand}"/>
+        </StackPanel>
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 8">
+            <Grid.Resources>
+                <Style TargetType="Rectangle">
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="Fill" Value="{StaticResource MainColorBrush}"/>
+                    <Setter Property="Opacity" Value="0.75"/>
+                </Style>
+            </Grid.Resources>
+            <Rectangle Width="30" Height="30"/>
+            <Rectangle Margin="16 18" Width="20" Height="20"/>
+        </Grid>
+        <DockPanel Margin="32 48 32 32" LastChildFill="True">
+            <DockPanel.Resources>
+                <DataTemplate DataType="{x:Type vm:PreparingPageViewModel}">
+                    <local:PreparingPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:AbortedPageViewModel}">
+                    <local:AbortedPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:WelcomePageViewModel}">
+                    <local:WelcomePage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:NotLatestVersionPageViewModel}">
+                    <local:NotLatestVersionPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:SelectBve6PageViewModel}">
+                    <local:SelectBve6Page/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:SelectBve5PageViewModel}">
+                    <local:SelectBve5Page/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:ConfirmPageViewModel}">
+                    <local:ConfirmPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:InstallingPageViewModel}">
+                    <local:InstallingPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:CompletedPageViewModel}">
+                    <local:CompletedPage/>
+                </DataTemplate>
+            </DockPanel.Resources>
+            <TextBlock DockPanel.Dock="Top" Text="{Binding Page.Value.Caption}" FontSize="40"/>
+            <TextBlock DockPanel.Dock="Top" Margin="0 16 0 32" Text="{Binding Page.Value.Description}" TextWrapping="Wrap"/>
+            <ContentControl Focusable="False" Content="{Binding Page.Value}"/>
+        </DockPanel>
+        <Grid Height="6" VerticalAlignment="Bottom" Background="#3CE7C2"/>
+    </Grid>
+</Window>
