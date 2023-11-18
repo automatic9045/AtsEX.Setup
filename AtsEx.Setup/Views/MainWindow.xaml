@@ -80,6 +80,9 @@
                 <DataTemplate DataType="{x:Type vm:SelectBve5PageViewModel}">
                     <local:SelectBve5Page/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:SelectScenarioDirectoryPageViewModel}">
+                    <local:SelectScenarioDirectoryPage/>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:ConfirmPageViewModel}">
                     <local:ConfirmPage/>
                 </DataTemplate>

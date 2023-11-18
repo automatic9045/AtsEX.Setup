@@ -25,7 +25,7 @@ namespace AtsEx.Setup.Models
         {
             if (path is null)
             {
-                if (TargetBve.Bve6Path is null)
+                if (TargetPath.Bve6Path is null)
                 {
                     MessageBox.Show("BVE Trainsim 6 / 5 両方に対して AtsEX のインストールを [スキップ] することはできません。", "AtsEX セットアップウィザード", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -37,8 +37,8 @@ namespace AtsEx.Setup.Models
                 }
             }
 
-            TargetBve.Bve5Path = path;
-            Navigator.Instance.Page.Value = Page.Confirm;
+            TargetPath.Bve5Path = path;
+            Navigator.Instance.Page.Value = Page.SelectScenarioDirectory;
         }
 
 

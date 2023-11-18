@@ -16,6 +16,7 @@ namespace AtsEx.Setup
             { (int)Page.NotLatestVersion, new Lazy<IPageViewModel>(() => new NotLatestVersionPageViewModel()) },
             { (int)Page.SelectBve6, new Lazy<IPageViewModel>(() => new SelectBve6PageViewModel()) },
             { (int)Page.SelectBve5, new Lazy<IPageViewModel>(() => new SelectBve5PageViewModel()) },
+            { (int)Page.SelectScenarioDirectory, new Lazy<IPageViewModel>(() => new SelectScenarioDirectoryPageViewModel()) },
             { (int)Page.Confirm, new Lazy<IPageViewModel>(() => new ConfirmPageViewModel()) },
             { (int)Page.Installing, new Lazy<IPageViewModel>(() => new InstallingPageViewModel())  },
             { (int)Page.Completed, new Lazy<IPageViewModel>(() => new CompletedPageViewModel())  },

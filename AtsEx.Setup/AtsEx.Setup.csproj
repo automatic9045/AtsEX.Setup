@@ -139,9 +139,10 @@
     <Compile Include="Models\SelectBve6PageModel.cs" />
     <Compile Include="Models\SelectBveByProcessWindowModel.cs" />
     <Compile Include="Models\SelectBvePageModelBase.cs" />
+    <Compile Include="Models\SelectScenarioDirectoryPageModel.cs" />
     <Compile Include="ProcessEnumerator.cs" />
     <Compile Include="ProcessInfo.cs" />
-    <Compile Include="TargetBve.cs" />
+    <Compile Include="TargetPath.cs" />
     <Compile Include="Models\WelcomePageModel.cs" />
     <Compile Include="Models\Navigator.cs" />
     <Compile Include="Page.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="ViewModels\SelectBve6PageViewModel.cs" />
     <Compile Include="ViewModels\SelectBveByProcessWindowViewModel.cs" />
     <Compile Include="ViewModels\SelectBvePageViewModelBase.cs" />
+    <Compile Include="ViewModels\SelectScenarioDirectoryPageViewModel.cs" />
     <Compile Include="Views\AbortedPage.xaml.cs">
       <DependentUpon>AbortedPage.xaml</DependentUpon>
     </Compile>
@@ -186,6 +188,9 @@
     </Compile>
     <Compile Include="Views\SelectBveByProcessWindow.xaml.cs">
       <DependentUpon>SelectBveByProcessWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectScenarioDirectoryPage.xaml.cs">
+      <DependentUpon>SelectScenarioDirectoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
@@ -246,6 +251,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SelectScenarioDirectoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -258,6 +267,7 @@
     <EmbeddedResource Include="Packages\AtsEx.zip" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Packages\Scenarios.zip" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

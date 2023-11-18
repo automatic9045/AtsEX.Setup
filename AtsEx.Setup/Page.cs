@@ -12,6 +12,7 @@ namespace AtsEx.Setup
         NotLatestVersion,
         SelectBve6,
         SelectBve5,
+        SelectScenarioDirectory,
         Confirm,
         Installing,
         Completed,

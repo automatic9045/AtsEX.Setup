@@ -11,7 +11,7 @@
     </UserControl.Resources>
     <DockPanel LastChildFill="False">
         <TextBlock DockPanel.Dock="Top" Text="現在のステータス:"/>
-        <ProgressBar DockPanel.Dock="Top" Margin="0 4" Height="16" Maximum="400" Value="{Binding ProgressValue.Value}"/>
+        <ProgressBar DockPanel.Dock="Top" Margin="0 4" Height="16" Maximum="500" Value="{Binding ProgressValue.Value}"/>
         <TextBlock DockPanel.Dock="Top" Text="{Binding ProgressDetail.Value}"/>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <StackPanel.Resources>

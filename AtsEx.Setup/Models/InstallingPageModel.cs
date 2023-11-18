@@ -55,14 +55,14 @@ namespace AtsEx.Setup.Models
                 string fileName = "AtsEx.Caller.InputDevice.dll";
                 Package package = Package.FromResource($"{Namespace}.{fileName}");
 
-                if (!(TargetBve.Bve6Path is null))
+                if (!(TargetPath.Bve6Path is null))
                 {
-                    LocateCallerAndLink(TargetBve.Bve6Path, 6, 220);
+                    LocateCallerAndLink(TargetPath.Bve6Path, 6, 220);
                 }
 
-                if (!(TargetBve.Bve5Path is null))
+                if (!(TargetPath.Bve5Path is null))
                 {
-                    LocateCallerAndLink(TargetBve.Bve5Path, 5, 260);
+                    LocateCallerAndLink(TargetPath.Bve5Path, 5, 260);
                 }
 
                 void LocateCallerAndLink(string bvePath, int bveVersion, int progressValueOrigin)
@@ -82,14 +82,14 @@ namespace AtsEx.Setup.Models
                         DirectoryInfo directoryInfo = new DirectoryInfo(inputDevicesAtsExDirectory);
                         if (!directoryInfo.Attributes.HasFlag(FileAttributes.ReparsePoint))
                         {
-                            stateReporter.Report(new State(progressValueOrigin + 15, $"BVE Trainsim {bveVersion} に配置されている既存の AtsEX のバックアップを作成しています..."));
+                            stateReporter.Report(new State(progressValueOrigin + 10, $"BVE Trainsim {bveVersion} に配置されている既存の AtsEX のバックアップを作成しています..."));
 
                             ZipFile.CreateFromDirectory(inputDevicesAtsExDirectory, FileNamer.CreateFilePathInSequence(inputDevicesAtsExDirectory + "_old.zip"));
                             Directory.Delete(inputDevicesAtsExDirectory, true);
                         }
                     }
 
-                    stateReporter.Report(new State(progressValueOrigin + 25, $"BVE Trainsim {bveVersion} に AtsEX 本体へのシンボリックリンクを作成しています..."));
+                    stateReporter.Report(new State(progressValueOrigin + 20, $"BVE Trainsim {bveVersion} に AtsEX 本体へのシンボリックリンクを作成しています..."));
 
                     Kernel32.CreateSymbolicLink(Path.Combine(inputDevicesDirectory, "AtsEx"), atsExDirectory, Kernel32.SymbolicLinkType.SYMBOLIC_LINK_FLAG_DIRECTORY);
 
@@ -97,13 +97,13 @@ namespace AtsEx.Setup.Models
                 }
             }
 
-            if (!(TargetBve.Bve5Path is null))
+            if (!(TargetPath.Bve5Path is null))
             {
-                string bve5FileName = Path.GetFileName(TargetBve.Bve5Path);
-                stateReporter.Report(new State(300, $"Bve Trainsim 5 の {bve5FileName}.config を編集しています..."));
+                string bve5FileName = Path.GetFileName(TargetPath.Bve5Path);
+                stateReporter.Report(new State(290, $"Bve Trainsim 5 の {bve5FileName}.config を編集しています..."));
 
                 Package package = Package.FromResource($"{Namespace}.Bve5Config.xml");
-                package.Locate($"{TargetBve.Bve5Path}.config");
+                package.Locate($"{TargetPath.Bve5Path}.config");
 
                 Task.Delay(DelayMilliseconds).Wait();
             }
@@ -117,13 +117,13 @@ namespace AtsEx.Setup.Models
                     ReportState(0, "このユーザーで BVE Trainsim が使用されているか確認しています...");
                     Task.Delay(DelayMilliseconds / 4).Wait();
 
-                    if (!(TargetBve.Bve6Path is null))
+                    if (!(TargetPath.Bve6Path is null))
                     {
                         ReportState(0.2, "BVE Trainsim 6 の設定ファイルを編集しています...");
                         EditPreferences("BveTs6.Preferences.xml");
                     }
 
-                    if (!(TargetBve.Bve5Path is null))
+                    if (!(TargetPath.Bve5Path is null))
                     {
                         ReportState(0.6, "BVE Trainsim 5 の設定ファイルを編集しています...");
                         EditPreferences("Preferences.xml");
@@ -147,6 +147,16 @@ namespace AtsEx.Setup.Models
                         Task.Delay(DelayMilliseconds).Wait();
                     }
                 }
+            }
+
+            if (!(TargetPath.ScenarioDirectory is null))
+            {
+                stateReporter.Report(new State(400, "AtsEX サンプルシナリオを展開・配置しています..."));
+
+                ArchivedPackage archive = ArchivedPackage.FromResource($"{Namespace}.Scenarios.zip");
+                archive.ExtractAndLocate(TargetPath.ScenarioDirectory);
+
+                Task.Delay(DelayMilliseconds).Wait();
             }
 
             stateReporter.Report(new State(500, "インストール処理を完了させています..."));

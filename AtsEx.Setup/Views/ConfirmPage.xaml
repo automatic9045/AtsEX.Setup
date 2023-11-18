@@ -14,6 +14,8 @@
         <TextBlock DockPanel.Dock="Top" Margin="16 4" Text="{Binding Bve6Path.Value}"/>
         <TextBlock DockPanel.Dock="Top" Margin="0 16 0 0" Text="BVE Trainsim 5 の場所:"/>
         <TextBlock DockPanel.Dock="Top" Margin="16 4" Text="{Binding Bve5Path.Value}"/>
+        <TextBlock DockPanel.Dock="Top" Margin="0 16 0 0" Text="シナリオフォルダの場所:"/>
+        <TextBlock DockPanel.Dock="Top" Margin="16 4" Text="{Binding ScenarioDirectory.Value}"/>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource NavigationButton}"/>

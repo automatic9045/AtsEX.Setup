@@ -25,7 +25,7 @@ namespace AtsEx.Setup.Models
 
         public void GoBack()
         {
-            Navigator.Instance.Page.Value = Page.SelectBve5;
+            Navigator.Instance.Page.Value = Page.SelectScenarioDirectory;
         }
 
         public void BeginInstall()
@@ -33,7 +33,7 @@ namespace AtsEx.Setup.Models
             ProcessEnumerator processEnumerator = new ProcessEnumerator();
             foreach (ProcessInfo processInfo in processEnumerator.GetProcesses())
             {
-                if (!(processInfo.Path is null) && (processInfo.Path == TargetBve.Bve6Path || processInfo.Path == TargetBve.Bve5Path))
+                if (!(processInfo.Path is null) && (processInfo.Path == TargetPath.Bve6Path || processInfo.Path == TargetPath.Bve5Path))
                 {
                     if (MessageBox.Show($"適用対象となる BVE は、インストール前に終了しておく必要があります。\n[OK] をクリックすると '{processInfo.Path}' の実行を終了します。", "AtsEX セットアップウィザード", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
                     {
