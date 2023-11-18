@@ -151,7 +151,16 @@ namespace AtsEx.Setup.Models
 
             if (!(TargetPath.ScenarioDirectory is null))
             {
-                stateReporter.Report(new State(400, "AtsEX サンプルシナリオを展開・配置しています..."));
+                string sampleDirectory = Path.Combine(TargetPath.ScenarioDirectory, "AtsEx.Samples");
+                if (Directory.Exists(sampleDirectory))
+                {
+                    stateReporter.Report(new State(400, "シナリオフォルダに配置されている既存の AtsEX サンプルシナリオのバックアップを作成しています..."));
+
+                    ZipFile.CreateFromDirectory(sampleDirectory, FileNamer.CreateFilePathInSequence(sampleDirectory + "_old.zip"));
+                    Directory.Delete(sampleDirectory, true);
+                }
+
+                stateReporter.Report(new State(420, "AtsEX サンプルシナリオを展開・配置しています..."));
 
                 ArchivedPackage archive = ArchivedPackage.FromResource($"{Namespace}.Scenarios.zip");
                 archive.ExtractAndLocate(TargetPath.ScenarioDirectory);
