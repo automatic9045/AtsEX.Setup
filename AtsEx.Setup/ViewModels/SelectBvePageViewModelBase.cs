@@ -41,7 +41,7 @@ namespace AtsEx.Setup.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private protected SelectBvePageViewModelBase(SelectBvePageModelBase model, int bveVersion)
+        private protected SelectBvePageViewModelBase(SelectBvePageModelBase model, int bveVersion, string initialPath)
         {
             Model = model;
 
@@ -53,6 +53,9 @@ namespace AtsEx.Setup.ViewModels
 
             Error = new ReactivePropertySlim<BveFileError>(BveFileError.NotSelected).AddTo(Disposables);
             ErrorText = Error.Select(Converter.Convert).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+
+            SelectBvePageModelBase.BveFileInfo defaultFile = initialPath is null ? null : Model.CreateFileInfo(initialPath);
+            TrySetFileData(defaultFile);
 
             OpenFileByProcessCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(() =>
             {

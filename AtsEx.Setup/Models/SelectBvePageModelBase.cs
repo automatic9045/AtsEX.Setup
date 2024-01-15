@@ -50,7 +50,7 @@ namespace AtsEx.Setup.Models
             return dialog.ShowDialog() == true ? CreateFileInfo(dialog.FileName) : null;
         }
 
-        private BveFileInfo CreateFileInfo(string path)
+        public BveFileInfo CreateFileInfo(string path)
         {
             BveFileError error = Validator.Validate(path);
             return new BveFileInfo(path, error);

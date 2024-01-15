@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,15 @@ namespace AtsEx.Setup.ViewModels
     {
         private protected override BveFileErrorConverter Converter { get; } = new SelectBve6ErrorConverter();
 
-        public SelectBve6PageViewModel() : base(new SelectBve6PageModel(), 6)
+        public SelectBve6PageViewModel() : base(new SelectBve6PageModel(), 6, GetInitialPath())
         {
+        }
+
+        private static string GetInitialPath()
+        {
+            string programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            string defaultPath = System.IO.Path.Combine(programFilesPath, @"mackoy\BveTs6\BveTs.exe");
+            return File.Exists(defaultPath) ? defaultPath : null;
         }
 
 
