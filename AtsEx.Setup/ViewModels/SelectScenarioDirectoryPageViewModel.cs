@@ -40,7 +40,7 @@ namespace AtsEx.Setup.ViewModels
             string document = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string defaultScenarioDirectory = System.IO.Path.Combine(document, @"BveTs\Scenarios");
 
-            _Path = new ReactivePropertySlim<string>(defaultScenarioDirectory);
+            _Path = new ReactivePropertySlim<string>(Directory.Exists(defaultScenarioDirectory) ? defaultScenarioDirectory : null);
             Path = _Path.Select(x => x ?? "(フォルダ未選択)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             OpenFolderCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(() =>
