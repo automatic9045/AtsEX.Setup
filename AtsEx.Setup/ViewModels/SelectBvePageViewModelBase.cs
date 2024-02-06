@@ -21,6 +21,8 @@ namespace AtsEx.Setup.ViewModels
         private readonly CompositeDisposable Disposables = new CompositeDisposable();
         private readonly SelectBvePageModelBase Model;
 
+        private bool IsInitial = true;
+
         private protected abstract BveFileErrorConverter Converter { get; }
 
         public string Caption { get; }
@@ -49,13 +51,14 @@ namespace AtsEx.Setup.ViewModels
             Description = $"AtsEX を適用する BVE Trainsim {bveVersion} を選択してください。";
 
             _Path = new ReactivePropertySlim<string>();
-            Path = _Path.Select(x => x ?? "(ファイル未選択)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+            Path = _Path.Select(x => x + (IsInitial ? " (自動検出)" : "") ?? "(ファイル未選択)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             Error = new ReactivePropertySlim<BveFileError>(BveFileError.NotSelected).AddTo(Disposables);
             ErrorText = Error.Select(Converter.Convert).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             SelectBvePageModelBase.BveFileInfo defaultFile = initialPath is null ? null : Model.CreateFileInfo(initialPath);
             TrySetFileData(defaultFile);
+            IsInitial = false;
 
             OpenFileByProcessCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(() =>
             {
