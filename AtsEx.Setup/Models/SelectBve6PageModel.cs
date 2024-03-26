@@ -31,7 +31,7 @@ namespace AtsEx.Setup.Models
                 }
             }
 
-            TargetPath.Bve6Path = path;
+            TargetPath.Bve6Path.Value = path;
             Navigator.Instance.Page.Value = Page.SelectBve5;
         }
 

@@ -43,7 +43,7 @@ namespace AtsEx.Setup.Models
                 return;
             }
 
-            TargetPath.ScenarioDirectory = path;
+            TargetPath.ScenarioDirectory.Value = path;
             Navigator.Instance.Page.Value = Page.Confirm;
         }
 

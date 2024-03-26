@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,9 +24,9 @@ namespace AtsEx.Setup.ViewModels
         public string Caption { get; } = "インストールを開始します";
         public string Description { get; } = "以下の構成で AtsEX のインストールを開始します。";
 
-        public ReactivePropertySlim<string> Bve6Path { get; }
-        public ReactivePropertySlim<string> Bve5Path { get; }
-        public ReactivePropertySlim<string> ScenarioDirectory { get; }
+        public ReadOnlyReactivePropertySlim<string> Bve6Path { get; }
+        public ReadOnlyReactivePropertySlim<string> Bve5Path { get; }
+        public ReadOnlyReactivePropertySlim<string> ScenarioDirectory { get; }
 
         public ReactiveCommand GoBackCommand { get; }
         public ReactiveCommand BeginInstallCommand { get; }
@@ -35,9 +35,9 @@ namespace AtsEx.Setup.ViewModels
 
         public ConfirmPageViewModel()
         {
-            Bve6Path = new ReactivePropertySlim<string>(TargetPath.Bve6Path ?? "(AtsEX を BVE Trainsim 6 にインストールしない)").AddTo(Disposables);
-            Bve5Path = new ReactivePropertySlim<string>(TargetPath.Bve5Path ?? "(AtsEX を BVE Trainsim 5 にインストールしない)").AddTo(Disposables);
-            ScenarioDirectory = new ReactivePropertySlim<string>(TargetPath.ScenarioDirectory ?? "(AtsEX サンプルをインストールしない)").AddTo(Disposables);
+            Bve6Path = TargetPath.Bve6Path.Select(x => x ?? "(AtsEX を BVE Trainsim 6 にインストールしない)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+            Bve5Path = TargetPath.Bve5Path.Select(x => x ?? "(AtsEX を BVE Trainsim 5 にインストールしない)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+            ScenarioDirectory = TargetPath.ScenarioDirectory.Select(x => x ?? "(AtsEX サンプルをインストールしない)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             GoBackCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.GoBack);
             BeginInstallCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.BeginInstall);
