@@ -23,7 +23,7 @@ namespace AtsEx.Setup.ViewModels
         public string Caption { get; } = "AtsEX のインストールを中止しました";
         public string Description { get; } = "エラーが発生したか、またはユーザーの操作により、AtsEX のインストールは中止されました。";
 
-        public ReactivePropertySlim<string> Detail { get; }
+        public ReadOnlyReactivePropertySlim<string> Detail { get; }
 
         public ReactiveCommand FinishCommand { get; }
 
@@ -31,7 +31,7 @@ namespace AtsEx.Setup.ViewModels
 
         public AbortedPageViewModel()
         {
-            Detail = new ReactivePropertySlim<string>().AddTo(Disposables);
+            Detail = Navigator.Instance.ErrorDetail.ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             FinishCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.Finish);
         }

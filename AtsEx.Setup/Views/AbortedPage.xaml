@@ -16,8 +16,6 @@
             </StackPanel.Resources>
             <Button Content="終了" Command="{Binding FinishCommand}"/>
         </StackPanel>
-        <Border BorderBrush="Black" BorderThickness="1" Background="White">
-            <TextBlock Margin="8" Text="{Binding Detail.Value}"/>
-        </Border>
+        <TextBox Text="{Binding Detail.Value, Mode=OneWay}" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" IsReadOnly="True"/>
     </DockPanel>
 </UserControl>

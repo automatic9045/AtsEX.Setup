@@ -23,6 +23,7 @@ namespace AtsEx.Setup.Models
 
         public ReactivePropertySlim<Page> Page { get; }
         public ReactivePropertySlim<bool> CanClose { get; }
+        public ReactivePropertySlim<string> ErrorDetail { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -30,10 +31,12 @@ namespace AtsEx.Setup.Models
         {
             Page = new ReactivePropertySlim<Page>(Setup.Page.Preparing).AddTo(Disposables);
             CanClose = new ReactivePropertySlim<bool>(true).AddTo(Disposables);
+            ErrorDetail = new ReactivePropertySlim<string>(null).AddTo(Disposables);
         }
 
         public void Abort(string detail)
         {
+            ErrorDetail.Value = detail;
             CanClose.Value = true;
             Page.Value = Setup.Page.Aborted;
         }
