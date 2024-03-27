@@ -34,6 +34,7 @@ namespace AtsEx.Setup.Models
 
         public void Abort(string detail)
         {
+            CanClose.Value = true;
             Page.Value = Setup.Page.Aborted;
         }
 
