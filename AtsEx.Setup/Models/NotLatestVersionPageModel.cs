@@ -33,7 +33,7 @@ namespace AtsEx.Setup.Models
 
         public void GetLatest()
         {
-            Process.Start("https://automatic9045.github.io/contents/bve/AtsEX/");
+            Process.Start("https://www.okaoka-depot.com/AtsEX/");
             Application.Current.Shutdown();
         }
 
