@@ -22,26 +22,19 @@ namespace AtsEx.Setup.Models
         private readonly CompositeDisposable Disposables = new CompositeDisposable();
 
         public ReactivePropertySlim<Page> Page { get; }
-        public ReadOnlyReactivePropertySlim<IPageViewModel> PageViewModel { get; private set; } = null;
         public ReactivePropertySlim<bool> CanClose { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Navigator()
         {
-            Page = new ReactivePropertySlim<Page>(Setup.Page.Welcome).AddTo(Disposables);
-            PageViewModel = Observable.Return<IPageViewModel>(new PreparingPageViewModel()).ToReadOnlyReactivePropertySlim();
+            Page = new ReactivePropertySlim<Page>(Setup.Page.Preparing).AddTo(Disposables);
             CanClose = new ReactivePropertySlim<bool>(true).AddTo(Disposables);
-        }
-
-        public void Start()
-        {
-            PageViewModel = Page.Select(x => x.Convert()).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
         }
 
         public void Abort(string detail)
         {
-            PageViewModel = Observable.Return<IPageViewModel>(new AbortedPageViewModel()).ToReadOnlyReactivePropertySlim();
+            Page.Value = Setup.Page.Aborted;
         }
 
         public void Dispose()

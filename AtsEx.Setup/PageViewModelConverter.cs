@@ -12,6 +12,8 @@ namespace AtsEx.Setup
     {
         private readonly static Dictionary<int, Lazy<IPageViewModel>> Dic = new Dictionary<int, Lazy<IPageViewModel>>()
         {
+            { (int)Page.Preparing, new Lazy<IPageViewModel>(() => new PreparingPageViewModel()) },
+            { (int)Page.Aborted, new Lazy<IPageViewModel>(() => new AbortedPageViewModel()) },
             { (int)Page.Welcome, new Lazy<IPageViewModel>(() => new WelcomePageViewModel()) },
             { (int)Page.NotLatestVersion, new Lazy<IPageViewModel>(() => new NotLatestVersionPageViewModel()) },
             { (int)Page.SelectBve6, new Lazy<IPageViewModel>(() => new SelectBve6PageViewModel()) },

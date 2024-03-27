@@ -8,6 +8,8 @@ namespace AtsEx.Setup
 {
     internal enum Page
     {
+        Preparing,
+        Aborted,
         Welcome,
         NotLatestVersion,
         SelectBve6,

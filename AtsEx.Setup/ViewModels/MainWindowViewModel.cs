@@ -12,6 +12,7 @@ using Reactive.Bindings.Disposables;
 using Reactive.Bindings.Extensions;
 
 using AtsEx.Setup.Models;
+using AtsEx.Setup.Releases;
 
 namespace AtsEx.Setup.ViewModels
 {
@@ -19,7 +20,7 @@ namespace AtsEx.Setup.ViewModels
     {
         private readonly CompositeDisposable Disposables = new CompositeDisposable();
 
-        public ReactivePropertySlim<IPageViewModel> Page { get; }
+        public ReactiveProperty<IPageViewModel> Page { get; }
 
         public AsyncReactiveCommand GoToWelcomePageCommand { get; }
         public ReactiveCommand MinimizeCommand { get; }
@@ -29,15 +30,15 @@ namespace AtsEx.Setup.ViewModels
 
         public MainWindowViewModel()
         {
-            Page = new ReactivePropertySlim<IPageViewModel>(new PreparingPageViewModel()).AddTo(Disposables);
+            Page = Navigator.Instance.Page.Select(x => x.Convert()).ToReactiveProperty().AddTo(Disposables);
 
             MinimizeCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Minimize);
             CloseCommand = new ReactiveCommand(Navigator.Instance.CanClose).AddTo(Disposables).WithSubscribe(Close);
 
             GoToWelcomePageCommand = new AsyncReactiveCommand().AddTo(Disposables).WithSubscribe(async () => await Task.Run(() =>
             {
-                Navigator.Instance.Start();
-                Navigator.Instance.PageViewModel.Subscribe(x => Page.Value = x);
+
+                Navigator.Instance.Page.Value = Setup.Page.Welcome;
             }));
             GoToWelcomePageCommand.Execute();
         }
