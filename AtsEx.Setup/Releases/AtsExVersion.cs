@@ -10,17 +10,19 @@ namespace AtsEx.Setup.Releases
     internal static class AtsExVersion
     {
         public static Version Current { get; }
-
-        private static readonly Task<ReleaseInfo> GetLatestReleaseTask;
-        public static Version Latest => GetLatestReleaseTask.Result.Version;
+        public static Version Latest { get; private set; }
 
         static AtsExVersion()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             Current = assembly.GetName().Version;
+        }
 
+        public static async Task CommunicateAsync()
+        {
             AtsExRepositoryHost repositoryHost = new AtsExRepositoryHost();
-            GetLatestReleaseTask = repositoryHost.GetLatestReleaseAsync();
+            ReleaseInfo release = await repositoryHost.GetLatestReleaseAsync();
+            Latest = release.Version;
         }
     }
 }

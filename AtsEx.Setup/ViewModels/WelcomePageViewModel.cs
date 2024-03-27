@@ -27,7 +27,7 @@ namespace AtsEx.Setup.ViewModels
         public ReactivePropertySlim<string> Version { get; }
         public ReactivePropertySlim<string> Edition { get; }
 
-        public AsyncReactiveCommand GoNextCommand { get; }
+        public ReactiveCommand GoNextCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -36,7 +36,7 @@ namespace AtsEx.Setup.ViewModels
             Version = new ReactivePropertySlim<string>($"Version {AtsExVersion.Current}").AddTo(Disposables);
             Edition = new ReactivePropertySlim<string>($"入力デバイスプラグイン版").AddTo(Disposables);
 
-            GoNextCommand = new AsyncReactiveCommand().AddTo(Disposables).WithSubscribe(Model.GoNextAsync);
+            GoNextCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.GoNext);
         }
 
         public void Dispose()

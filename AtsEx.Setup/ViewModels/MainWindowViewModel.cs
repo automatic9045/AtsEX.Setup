@@ -35,11 +35,11 @@ namespace AtsEx.Setup.ViewModels
             MinimizeCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Minimize);
             CloseCommand = new ReactiveCommand(Navigator.Instance.CanClose).AddTo(Disposables).WithSubscribe(Close);
 
-            GoToWelcomePageCommand = new AsyncReactiveCommand().AddTo(Disposables).WithSubscribe(async () => await Task.Run(() =>
+            GoToWelcomePageCommand = new AsyncReactiveCommand().AddTo(Disposables).WithSubscribe(async () =>
             {
-
+                await AtsExVersion.CommunicateAsync();
                 Navigator.Instance.Page.Value = Setup.Page.Welcome;
-            }));
+            });
             GoToWelcomePageCommand.Execute();
         }
 

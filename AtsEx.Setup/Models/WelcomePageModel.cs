@@ -24,13 +24,12 @@ namespace AtsEx.Setup.Models
         {
         }
 
-        public async Task GoNextAsync()
+        public void GoNext()
         {
             bool isNotLatest = false;
             try
             {
-                Version latest = await Task.Run(() => AtsExVersion.Latest);
-                isNotLatest = AtsExVersion.Current < latest;
+                isNotLatest = AtsExVersion.Current < AtsExVersion.Latest;
             }
             catch { }
 
