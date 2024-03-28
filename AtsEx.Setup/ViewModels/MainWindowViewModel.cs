@@ -22,7 +22,6 @@ namespace AtsEx.Setup.ViewModels
 
         public ReactiveProperty<IPageViewModel> Page { get; }
 
-        public AsyncReactiveCommand GoToWelcomePageCommand { get; }
         public ReactiveCommand MinimizeCommand { get; }
         public ReactiveCommand CloseCommand { get; }
 
@@ -35,12 +34,18 @@ namespace AtsEx.Setup.ViewModels
             MinimizeCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Minimize);
             CloseCommand = new ReactiveCommand(Navigator.Instance.CanClose).AddTo(Disposables).WithSubscribe(Close);
 
-            GoToWelcomePageCommand = new AsyncReactiveCommand().AddTo(Disposables).WithSubscribe(async () =>
+            if (Navigator.Instance.IsInteractive)
             {
-                await AtsExVersion.CommunicateAsync();
-                Navigator.Instance.Page.Value = Setup.Page.Welcome;
-            });
-            GoToWelcomePageCommand.Execute();
+                Task.Run(async () =>
+                {
+                    await AtsExVersion.CommunicateAsync();
+                    Navigator.Instance.Page.Value = Setup.Page.Welcome;
+                });
+            }
+            else
+            {
+                Navigator.Instance.Page.Value = Setup.Page.Installing;
+            }
         }
 
         private void Minimize()
