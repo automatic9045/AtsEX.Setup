@@ -26,7 +26,7 @@
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <Button Content="&lt; 戻る" Style="{StaticResource NavigationButton}" Command="{Binding GoBackCommand}"/>
             <Button Content="次へ &gt;" Style="{StaticResource NavigationButton}" Command="{Binding GoNextCommand}"/>
-            <Button Margin="8 0" Content="スキップ" Style="{StaticResource Hyperlink}" Command="{Binding SkipCommand}"/>
+            <Button Margin="16 0 0 0" Content="スキップ" Style="{StaticResource NavigationButton}" Command="{Binding SkipCommand}"/>
         </StackPanel>
     </DockPanel>
 </UserControl>
