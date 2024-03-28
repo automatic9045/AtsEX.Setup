@@ -11,8 +11,8 @@ using Reactive.Bindings;
 using Reactive.Bindings.Disposables;
 using Reactive.Bindings.Extensions;
 
+using AtsEx.Setup.Installing;
 using AtsEx.Setup.Models;
-using AtsEx.Setup.Releases;
 
 namespace AtsEx.Setup.ViewModels
 {
@@ -53,7 +53,23 @@ namespace AtsEx.Setup.ViewModels
 
                 try
                 {
-                    await Task.Run(() => Model.Install(Progress));
+                    try
+                    {
+                        await Task.Run(() => Model.Install(Progress));
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        if (Permission.TryElevate())
+                        {
+                            Environment.Exit(0);
+                            return;
+                        }
+                        else
+                        {
+                            Navigator.Instance.Abort("指定されたフォルダへのインストールには管理者権限が必要です。");
+                            return;
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
