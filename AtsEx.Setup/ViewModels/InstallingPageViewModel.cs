@@ -20,7 +20,7 @@ namespace AtsEx.Setup.ViewModels
     {
         private readonly CompositeDisposable Disposables = new CompositeDisposable();
         private readonly InstallingPageModel Model = new InstallingPageModel();
-        private readonly Progress<InstallingPageModel.State> Progress;
+        private readonly Progress<InstallationState> Progress;
 
         private int TargetProgressValueSpeed = 0;
         private int TargetProgressValue = 0;
@@ -38,46 +38,23 @@ namespace AtsEx.Setup.ViewModels
 
         public InstallingPageViewModel()
         {
-            Progress = new Progress<InstallingPageModel.State>(x =>
+            Progress = new Progress<InstallationState>(x =>
             {
                 TargetProgressValue = x.Value;
                 ProgressDetail.Value = x.Detail;
             });
 
-            ProgressValue = new ReactivePropertySlim<int>(0).AddTo(Disposables);
-            ProgressDetail = new ReactivePropertySlim<string>("インストールを開始する準備をしています...").AddTo(Disposables);
+            ProgressValue = new ReactivePropertySlim<int>().AddTo(Disposables);
+            ProgressDetail = new ReactivePropertySlim<string>().AddTo(Disposables);
 
             InstallCommand = new AsyncReactiveCommand().AddTo(Disposables).WithSubscribe(async () =>
             {
                 Navigator.Instance.CanClose.Value = false;
+                ProgressValue.Value = 0;
+                ProgressDetail.Value = "インストールを開始する準備をしています...";
 
-                try
-                {
-                    try
-                    {
-                        await Task.Run(() => Model.Install(Progress));
-                    }
-                    catch (UnauthorizedAccessException)
-                    {
-                        if (Permission.TryElevate())
-                        {
-                            Environment.Exit(0);
-                            return;
-                        }
-                        else
-                        {
-                            Navigator.Instance.Abort("指定されたフォルダへのインストールには管理者権限が必要です。");
-                            return;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Navigator.Instance.Abort(ex.ToString());
-                    return;
-                }
+                await Model.InstallAsync(Progress);
 
-                Model.GoNext();
                 Navigator.Instance.CanClose.Value = true;
             });
             AbortCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.Abort);

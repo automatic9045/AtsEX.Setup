@@ -129,6 +129,8 @@
     </ApplicationDefinition>
     <Compile Include="BveFileError.cs" />
     <Compile Include="Installing\ArchivedPackage.cs" />
+    <Compile Include="Installing\InstallationState.cs" />
+    <Compile Include="Installing\Installer.cs" />
     <Compile Include="Installing\Permission.cs" />
     <Compile Include="Installing\FileNamer.cs" />
     <Compile Include="Installing\Package.cs" />
