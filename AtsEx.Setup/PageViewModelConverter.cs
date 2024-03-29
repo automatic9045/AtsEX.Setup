@@ -21,6 +21,7 @@ namespace AtsEx.Setup
             { (int)Page.SelectScenarioDirectory, new Lazy<IPageViewModel>(() => new SelectScenarioDirectoryPageViewModel()) },
             { (int)Page.Confirm, new Lazy<IPageViewModel>(() => new ConfirmPageViewModel()) },
             { (int)Page.Installing, new Lazy<IPageViewModel>(() => new InstallingPageViewModel())  },
+            { (int)Page.RequiresElevation, new Lazy<IPageViewModel>(() => new RequiresElevationPageViewModel())  },
             { (int)Page.Completed, new Lazy<IPageViewModel>(() => new CompletedPageViewModel())  },
         };
 

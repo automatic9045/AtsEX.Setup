@@ -36,15 +36,7 @@ namespace AtsEx.Setup.Models
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    if (Permission.TryElevate())
-                    {
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
-                        Navigator.Instance.Abort("指定されたフォルダへのインストールには管理者権限が必要です。");
-                        return;
-                    }
+                    Navigator.Instance.Page.Value = Page.RequiresElevation;
                     return;
                 }
                 catch (IOException ex)

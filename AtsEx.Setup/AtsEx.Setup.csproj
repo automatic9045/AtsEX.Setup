@@ -128,6 +128,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BveFileError.cs" />
+    <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="ViewModels\ElevationOption.cs" />
     <Compile Include="Installing\ArchivedPackage.cs" />
     <Compile Include="Installing\InstallationState.cs" />
     <Compile Include="Installing\Installer.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Models\InstallingPageModel.cs" />
     <Compile Include="Models\ConfirmPageModel.cs" />
     <Compile Include="Models\NotLatestVersionPageModel.cs" />
+    <Compile Include="Models\RequiresElevationPageModel.cs" />
     <Compile Include="Models\SelectBve5PageModel.cs" />
     <Compile Include="Models\SelectBve6PageModel.cs" />
     <Compile Include="Models\SelectBveByProcessWindowModel.cs" />
@@ -167,6 +170,7 @@
     <Compile Include="ViewModels\ConfirmPageViewModel.cs" />
     <Compile Include="ViewModels\NotLatestVersionPageViewModel.cs" />
     <Compile Include="ViewModels\PreparingPageViewModel.cs" />
+    <Compile Include="ViewModels\RequiresElevationPageViewModel.cs" />
     <Compile Include="ViewModels\SelectBve5PageViewModel.cs" />
     <Compile Include="ViewModels\SelectBve6PageViewModel.cs" />
     <Compile Include="ViewModels\SelectBveByProcessWindowViewModel.cs" />
@@ -189,6 +193,9 @@
     </Compile>
     <Compile Include="Views\PreparingPage.xaml.cs">
       <DependentUpon>PreparingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RequiresElevationPage.xaml.cs">
+      <DependentUpon>RequiresElevationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectBve5Page.xaml.cs">
       <DependentUpon>SelectBve5Page.xaml</DependentUpon>
@@ -246,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PreparingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RequiresElevationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

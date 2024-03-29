@@ -17,10 +17,6 @@ namespace AtsEx.Setup.Installing
     {
         public static bool TryElevate()
         {
-            MessageBoxResult confirm = MessageBox.Show("指定されたフォルダへのインストールには管理者権限が必要です。続行しますか?",
-                "AtsEX セットアップウィザード", MessageBoxButton.YesNo, MessageBoxImage.Information);
-            if (confirm != MessageBoxResult.Yes) return false;
-
             WindowInteropHelper helper = new WindowInteropHelper(Application.Current.MainWindow);
             ProcessStartInfo processStartInfo = new ProcessStartInfo()
             {

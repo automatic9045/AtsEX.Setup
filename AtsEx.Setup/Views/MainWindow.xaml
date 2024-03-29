@@ -9,7 +9,7 @@
         xmlns:vm="clr-namespace:AtsEx.Setup.ViewModels"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="AtsEX セットアップウィザード" Height="450" Width="800"
+        Title="AtsEX セットアップウィザード" Height="500" Width="800"
         ResizeMode="CanMinimize" Closing="OnClosing">
     <Window.Resources>
         <ResourceDictionary>
@@ -88,6 +88,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:InstallingPageViewModel}">
                     <local:InstallingPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:RequiresElevationPageViewModel}">
+                    <local:RequiresElevationPage/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:CompletedPageViewModel}">
                     <local:CompletedPage/>

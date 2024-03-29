@@ -17,6 +17,7 @@ namespace AtsEx.Setup
         SelectScenarioDirectory,
         Confirm,
         Installing,
+        RequiresElevation,
         Completed,
     }
 }
