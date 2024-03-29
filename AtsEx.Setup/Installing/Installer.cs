@@ -33,28 +33,19 @@ namespace AtsEx.Setup.Installing
             }*/
 
             {
-                StateReporter.Report(new InstallationState(100, "AtsEX 本体パッケージを展開・配置しています..."));
-
-                ArchivedPackage archive = ArchivedPackage.FromResource($"{Namespace}.AtsEx.zip");
-                archive.ExtractAndLocate(atsExDirectory);
-
-                Task.Delay(DelayMilliseconds).Wait();
-            }
-
-            {
-                StateReporter.Report(new InstallationState(200, "AtsEX Caller InputDevice を準備しています..."));
+                StateReporter.Report(new InstallationState(100, "AtsEX Caller InputDevice を準備しています..."));
 
                 string fileName = "AtsEx.Caller.InputDevice.dll";
                 Package package = Package.FromResource($"{Namespace}.{fileName}");
 
                 if (!(TargetPath.Bve6Path.Value is null))
                 {
-                    LocateCallerAndLink(TargetPath.Bve6Path.Value, 6, 220);
+                    LocateCallerAndLink(TargetPath.Bve6Path.Value, 6, 120);
                 }
 
                 if (!(TargetPath.Bve5Path.Value is null))
                 {
-                    LocateCallerAndLink(TargetPath.Bve5Path.Value, 5, 260);
+                    LocateCallerAndLink(TargetPath.Bve5Path.Value, 5, 160);
                 }
 
                 void LocateCallerAndLink(string bvePath, int bveVersion, int progressValueOrigin)
@@ -92,10 +83,19 @@ namespace AtsEx.Setup.Installing
             if (!(TargetPath.Bve5Path.Value is null))
             {
                 string bve5FileName = Path.GetFileName(TargetPath.Bve5Path.Value);
-                StateReporter.Report(new InstallationState(290, $"Bve Trainsim 5 の {bve5FileName}.config を編集しています..."));
+                StateReporter.Report(new InstallationState(190, $"Bve Trainsim 5 の {bve5FileName}.config を編集しています..."));
 
                 Package package = Package.FromResource($"{Namespace}.Bve5Config.xml");
                 package.Locate($"{TargetPath.Bve5Path.Value}.config");
+
+                Task.Delay(DelayMilliseconds).Wait();
+            }
+
+            {
+                StateReporter.Report(new InstallationState(200, "AtsEX 本体パッケージを展開・配置しています..."));
+
+                ArchivedPackage archive = ArchivedPackage.FromResource($"{Namespace}.AtsEx.zip");
+                archive.ExtractAndLocate(atsExDirectory);
 
                 Task.Delay(DelayMilliseconds).Wait();
             }
