@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,17 @@ namespace AtsEx.Setup.Models
                         return;
                     }
                     return;
+                }
+                catch (IOException ex)
+                {
+                    switch (ex.HResult)
+                    {
+                        case -2147024864: // 0x80070020
+                            Navigator.Instance.Abort($"{ex.Message}\nPC を再起動の上もう一度お試しください。");
+                            return;
+                        default:
+                            throw;
+                    }
                 }
             }
             catch (Exception ex)
