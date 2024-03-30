@@ -31,8 +31,29 @@ namespace AtsEx.Setup.Models
             {
                 try
                 {
-                    Installer installer = new Installer(stateReporter);
-                    await Task.Run(() => installer.Install());
+                    using (Installer installer = new Installer(stateReporter))
+                    {
+                        await Task.Run(() =>
+                        {
+                            if (TargetPath.CopyBve.Value)
+                            {
+                                if (TargetPath.Bve6Path.Value is null)
+                                {
+                                    string newBve5Path = installer.CopyBve(TargetPath.Bve5Path.Value, 5);
+                                    TargetPath.Bve5Path.Value = newBve5Path;
+                                }
+                                else
+                                {
+                                    string newBve6Path = installer.CopyBve(TargetPath.Bve6Path.Value, 6);
+                                    TargetPath.Bve6Path.Value = newBve6Path;
+                                }
+
+                                TargetPath.CopyBve.Value = false;
+                            }
+
+                            installer.Install();
+                        });
+                    }
                 }
                 catch (UnauthorizedAccessException)
                 {

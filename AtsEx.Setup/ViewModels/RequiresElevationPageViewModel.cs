@@ -25,6 +25,7 @@ namespace AtsEx.Setup.ViewModels
         public string Description { get; } = "指定されたフォルダへ AtsEX をインストールするには管理者権限が必要です。インストールを続行する方法を選択してください。";
 
         public ReadOnlyReactivePropertySlim<bool> CanUseSimpleInstall { get; }
+        public ReadOnlyReactivePropertySlim<bool> CanUseCopyBve { get; }
 
         public ReactivePropertySlim<ElevationOption> Option { get; }
 
@@ -43,6 +44,10 @@ namespace AtsEx.Setup.ViewModels
                 return (bve6 ?? true) && (bve5 ?? true);
             }).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
+            CanUseCopyBve = Observable.Merge(TargetPath.Bve6Path, TargetPath.Bve5Path)
+                .Select(_ => !(TargetPath.Bve6Path.Value is null && TargetPath.Bve5Path.Value is null))
+                .ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+
             Option = new ReactivePropertySlim<ElevationOption>(ElevationOption.RunAsAdmin).AddTo(Disposables);
 
             GoBackCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.GoBack);
@@ -56,8 +61,17 @@ namespace AtsEx.Setup.ViewModels
                     case ElevationOption.SimpleInstall:
                         Model.SimpleInstall();
                         break;
+                    case ElevationOption.CopyBve:
+                        MessageBoxResult result = MessageBox.Show(
+                            "[BVE 本体をコピー] は BVE Trainsim 本体の全てのファイルをコピーするため、インストールに時間がかかります。" +
+                            "その他のオプションがどうしても利用できない場合にのみ選択してください。\n\n" +
+                            "この設定でインストールを開始しても本当によろしいですか?", "AtsEX セットアップウィザード", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                        if (result != MessageBoxResult.Yes) break;
+
+                        Model.InstallWithCopyBve();
+                        break;
                     default:
-                        throw new NotImplementedException();
+                        throw new NotSupportedException();
                 }
             });
         }

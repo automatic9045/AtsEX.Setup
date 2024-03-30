@@ -45,6 +45,13 @@ namespace AtsEx.Setup.Models
             Navigator.Instance.Page.Value = Page.Installing;
         }
 
+        public void InstallWithCopyBve()
+        {
+            TargetPath.CopyBve.Value = true;
+
+            Navigator.Instance.Page.Value = Page.Installing;
+        }
+
         public void Dispose()
         {
             Disposables.Dispose();

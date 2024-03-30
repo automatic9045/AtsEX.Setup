@@ -45,9 +45,9 @@
             このオプションでインストールがスキップされるファイルは最小限であり、AtsEX の新機能の大半は利用することができます。
             ただし、環境にインストールされている AtsEX が破損している場合にこのオプションを選択すると、原因ファイルが修復されず、正常に動作しない可能性があります。
         </TextBlock>
-        <RadioButton DockPanel.Dock="Top" Margin="0 16 0 0" GroupName="Options" Content="BVE 本体をコピー" IsEnabled="False"
+        <RadioButton DockPanel.Dock="Top" Margin="0 16 0 0" GroupName="Options" Content="BVE 本体をコピー" IsEnabled="{Binding CanUseCopyBve.Value}"
                      IsChecked="{Binding Option.Value, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=CopyBve}"/>
-        <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap" IsEnabled="False">
+        <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap" IsEnabled="{Binding CanUseCopyBve.Value}">
             管理者権限への昇格を回避するために BVE Trainsim 本体をパブリックドキュメントフォルダへコピーし、そこに AtsEX をインストールします。<LineBreak/>
             他の 2 オプションのいずれも利用できない場合にのみ選択してください。
         </TextBlock>

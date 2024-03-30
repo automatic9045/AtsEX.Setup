@@ -130,6 +130,8 @@
     <Compile Include="BveFileError.cs" />
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
     <Compile Include="Installing\CallerInfo.cs" />
+    <Compile Include="Installing\DirectoryExtensions.cs" />
+    <Compile Include="Installing\ShortcutFactory.cs" />
     <Compile Include="ViewModels\ElevationOption.cs" />
     <Compile Include="Installing\ArchivedPackage.cs" />
     <Compile Include="Installing\InstallationState.cs" />
@@ -138,7 +140,6 @@
     <Compile Include="Installing\FileNamer.cs" />
     <Compile Include="Installing\Package.cs" />
     <Compile Include="Installing\PreferenceEditor.cs" />
-    <Compile Include="Installing\StartMenu.cs" />
     <Compile Include="Installing\WinUser.cs" />
     <Compile Include="Installing\WinUserCollection.cs" />
     <Compile Include="Models\AbortedPageModel.cs" />

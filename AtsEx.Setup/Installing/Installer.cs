@@ -10,27 +10,50 @@ using Vanara.PInvoke;
 
 namespace AtsEx.Setup.Installing
 {
-    internal class Installer
+    internal class Installer : IDisposable
     {
+        private static readonly string CommonDocumentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments);
         private static readonly string Namespace = "AtsEx.Setup.Packages";
         private static readonly int DelayMilliseconds = 500;
 
         private readonly IProgress<InstallationState> StateReporter;
+        private readonly ShortcutFactory ShortcutFactory;
 
         public Installer(IProgress<InstallationState> stateReporter)
         {
             StateReporter = stateReporter;
+            ShortcutFactory = new ShortcutFactory();
+        }
+
+        public void Dispose()
+        {
+            ShortcutFactory.Dispose();
+        }
+
+        public string CopyBve(string bvePath, int bveVersion)
+        {
+            StateReporter.Report(new InstallationState(20, $"BVE Trainsim {bveVersion} をコピーしています..."));
+
+            string destDirectory = Path.Combine(CommonDocumentsDirectory, $"mackoy\\BveTs{bveVersion}");
+            DirectoryExtensions.CopyDirectory(Path.GetDirectoryName(bvePath), destDirectory, true);
+
+            Task.Delay(DelayMilliseconds / 2).Wait();
+
+            StateReporter.Report(new InstallationState(70, $"コピーした BVE Trainsim {bveVersion} のショートカットを作成しています..."));
+
+            string newBvePath = Path.Combine(destDirectory, Path.GetFileName(bvePath));
+            ShortcutFactory.CreateToDesktop($"BVE Trainsim {bveVersion} with AtsEX.lnk", newBvePath);
+
+            Task.Delay(DelayMilliseconds / 2).Wait();
+
+            StateReporter.Report(new InstallationState(90, $"BVE Trainsim {bveVersion} のコピー処理を完了しています..."));
+
+            return newBvePath;
         }
 
         public void Install()
         {
-            string atsExDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments), "AtsEx");
-
-            /*
-            using (StartMenu startMenu = new StartMenu())
-            {
-                startMenu.CreateShortcut(@"AtsEX", atsExDirectory);
-            }*/
+            string atsExDirectory = Path.Combine(CommonDocumentsDirectory, "AtsEx");
 
             {
                 StateReporter.Report(new InstallationState(100, "AtsEX Caller InputDevice を準備しています..."));
@@ -40,6 +63,8 @@ namespace AtsEx.Setup.Installing
                 if (!(TargetPath.Bve6Path.Value is null))
                 {
                     LocateCallerAndLink(TargetPath.Bve6Path.Value, 6, 120);
+
+                    TargetPath.Bve6Path.Value = null;
                 }
 
                 if (!(TargetPath.Bve5Path.Value is null))
@@ -53,6 +78,8 @@ namespace AtsEx.Setup.Installing
                     configPackage.Locate($"{TargetPath.Bve5Path.Value}.config");
 
                     Task.Delay(DelayMilliseconds).Wait();
+
+                    TargetPath.Bve5Path.Value = null;
                 }
 
                 void LocateCallerAndLink(string bvePath, int bveVersion, int progressValueOrigin)
