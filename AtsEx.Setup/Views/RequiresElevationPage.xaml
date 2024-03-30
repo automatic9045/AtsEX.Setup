@@ -35,12 +35,12 @@
             このオプションには管理者権限が必要なため、例えば家庭の共用 PC をいちユーザーとして利用している場合は、PC の管理者の許可を得る必要があります。
             許可を得られない場合は以下の 2 オプションのいずれかを選択してください。
         </TextBlock>
-        <StackPanel DockPanel.Dock="Top" Margin="0 16 0 0" Orientation="Horizontal" IsEnabled="False">
+        <StackPanel DockPanel.Dock="Top" Margin="0 16 0 0" Orientation="Horizontal" IsEnabled="{Binding CanUseSimpleInstall.Value}">
             <RadioButton GroupName="Options" Content="シンプルインストール"
                          IsChecked="{Binding Option.Value, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SimpleInstall}"/>
             <TextBlock Margin="4 0 0 0" FontWeight="Bold">※所定のバージョンの AtsEX が既にインストールされている必要があります</TextBlock>
         </StackPanel>
-        <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap" IsEnabled="False">
+        <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap" IsEnabled="{Binding CanUseSimpleInstall.Value}">
             インストールに管理者権限が必要なファイル (AtsEX Caller InputDevice など) を新たにインストールせず、既存のファイルを流用します。<LineBreak/>
             このオプションでインストールがスキップされるファイルは最小限であり、AtsEX の新機能の大半は利用することができます。
             ただし、環境にインストールされている AtsEX が破損している場合にこのオプションを選択すると、原因ファイルが修復されず、正常に動作しない可能性があります。

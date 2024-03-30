@@ -35,8 +35,7 @@ namespace AtsEx.Setup.Installing
             {
                 StateReporter.Report(new InstallationState(100, "AtsEX Caller InputDevice を準備しています..."));
 
-                string fileName = "AtsEx.Caller.InputDevice.dll";
-                Package package = Package.FromResource($"{Namespace}.{fileName}");
+                Package package = Package.FromResource($"{Namespace}.{CallerInfo.FileName}");
 
                 if (!(TargetPath.Bve6Path.Value is null))
                 {
@@ -56,7 +55,7 @@ namespace AtsEx.Setup.Installing
                     string inputDevicesDirectory = Path.Combine(bveDirectory, "Input Devices");
                     string inputDevicesAtsExDirectory = Path.Combine(inputDevicesDirectory, "AtsEx");
 
-                    package.Locate(Path.Combine(inputDevicesDirectory, fileName));
+                    package.Locate(Path.Combine(inputDevicesDirectory, CallerInfo.FileName));
 
                     Task.Delay(DelayMilliseconds / 2).Wait();
 

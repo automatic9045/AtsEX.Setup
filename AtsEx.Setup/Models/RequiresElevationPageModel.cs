@@ -37,6 +37,14 @@ namespace AtsEx.Setup.Models
             }
         }
 
+        public void SimpleInstall()
+        {
+            TargetPath.Bve6Path.Value = null;
+            TargetPath.Bve5Path.Value = null;
+
+            Navigator.Instance.Page.Value = Page.Installing;
+        }
+
         public void Dispose()
         {
             Disposables.Dispose();
