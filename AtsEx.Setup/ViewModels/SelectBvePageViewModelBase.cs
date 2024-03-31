@@ -51,7 +51,7 @@ namespace AtsEx.Setup.ViewModels
             Description = $"AtsEX を適用する BVE Trainsim {bveVersion} を選択してください。";
 
             _Path = new ReactivePropertySlim<string>();
-            Path = _Path.Select(x => x + (IsInitial ? " (自動検出)" : "") ?? "(ファイル未選択)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+            Path = _Path.Select(x => x is null ? "(ファイル未選択)" : x + (IsInitial ? " (自動検出)" : "")).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             Error = new ReactivePropertySlim<BveFileError>(BveFileError.NotSelected).AddTo(Disposables);
             ErrorText = Error.Select(Converter.Convert).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
