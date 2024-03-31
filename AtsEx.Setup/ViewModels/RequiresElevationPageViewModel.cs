@@ -38,10 +38,10 @@ namespace AtsEx.Setup.ViewModels
         {
             CanUseSimpleInstall = Observable.Merge(TargetPath.Bve6Path, TargetPath.Bve5Path).Select(_ =>
             {
-                bool? bve6 = CallerInfo.TryCreateFromBvePath(TargetPath.Bve6Path.Value)?.CanUseSimpleInstall;
-                bool? bve5 = CallerInfo.TryCreateFromBvePath(TargetPath.Bve5Path.Value)?.CanUseSimpleInstall;
+                bool? bve6 = TargetPath.Bve6Path.Value is null ? true : CallerInfo.TryCreateFromBvePath(TargetPath.Bve6Path.Value)?.CanUseSimpleInstall;
+                bool? bve5 = TargetPath.Bve5Path.Value is null ? true : CallerInfo.TryCreateFromBvePath(TargetPath.Bve5Path.Value)?.CanUseSimpleInstall;
 
-                return (bve6 ?? true) && (bve5 ?? true);
+                return (bve6 ?? false) && (bve5 ?? false);
             }).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             CanUseCopyBve = Observable.Merge(TargetPath.Bve6Path, TargetPath.Bve5Path)
