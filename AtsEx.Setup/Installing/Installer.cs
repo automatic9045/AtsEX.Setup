@@ -35,7 +35,7 @@ namespace AtsEx.Setup.Installing
             {
                 StateReporter.Report(new InstallationState(100, "AtsEX Caller InputDevice を準備しています..."));
 
-                Package package = Package.FromResource($"{Namespace}.{CallerInfo.FileName}");
+                Package callerPackage = Package.FromResource($"{Namespace}.{CallerInfo.FileName}");
 
                 if (!(TargetPath.Bve6Path.Value is null))
                 {
@@ -45,6 +45,14 @@ namespace AtsEx.Setup.Installing
                 if (!(TargetPath.Bve5Path.Value is null))
                 {
                     LocateCallerAndLink(TargetPath.Bve5Path.Value, 5, 160);
+
+                    string bve5FileName = Path.GetFileName(TargetPath.Bve5Path.Value);
+                    StateReporter.Report(new InstallationState(190, $"Bve Trainsim 5 の {bve5FileName}.config を編集しています..."));
+
+                    Package configPackage = Package.FromResource($"{Namespace}.Bve5Config.xml");
+                    configPackage.Locate($"{TargetPath.Bve5Path.Value}.config");
+
+                    Task.Delay(DelayMilliseconds).Wait();
                 }
 
                 void LocateCallerAndLink(string bvePath, int bveVersion, int progressValueOrigin)
@@ -55,7 +63,7 @@ namespace AtsEx.Setup.Installing
                     string inputDevicesDirectory = Path.Combine(bveDirectory, "Input Devices");
                     string inputDevicesAtsExDirectory = Path.Combine(inputDevicesDirectory, "AtsEx");
 
-                    package.Locate(Path.Combine(inputDevicesDirectory, CallerInfo.FileName));
+                    callerPackage.Locate(Path.Combine(inputDevicesDirectory, CallerInfo.FileName));
 
                     Task.Delay(DelayMilliseconds / 2).Wait();
 
@@ -77,17 +85,6 @@ namespace AtsEx.Setup.Installing
 
                     Task.Delay(DelayMilliseconds / 2).Wait();
                 }
-            }
-
-            if (!(TargetPath.Bve5Path.Value is null))
-            {
-                string bve5FileName = Path.GetFileName(TargetPath.Bve5Path.Value);
-                StateReporter.Report(new InstallationState(190, $"Bve Trainsim 5 の {bve5FileName}.config を編集しています..."));
-
-                Package package = Package.FromResource($"{Namespace}.Bve5Config.xml");
-                package.Locate($"{TargetPath.Bve5Path.Value}.config");
-
-                Task.Delay(DelayMilliseconds).Wait();
             }
 
             {
