@@ -29,7 +29,28 @@ namespace AtsEx.Setup.Installing
         {
             if (File.Exists(destPath))
             {
-                File.Delete(destPath);
+                try
+                {
+                    File.Delete(destPath);
+                }
+                catch
+                {
+                    try
+                    {
+                        using (File.Open(destPath, FileMode.Open)) { }
+                    }
+                    catch (IOException ex)
+                    {
+                        switch (ex.HResult & 0xffff)
+                        {
+                            case 31:
+                            case 32:
+                                throw;
+                        }
+                    }
+
+                    throw;
+                }
             }
 
             using (FileStream fileStream = new FileStream(destPath, FileMode.CreateNew, FileAccess.Write))
