@@ -106,9 +106,13 @@ namespace AtsEx.Setup.Installing
                         }
                     }
 
-                    StateReporter.Report(new InstallationState(progressValueOrigin + 20, $"BVE Trainsim {bveVersion} に AtsEX 本体へのシンボリックリンクを作成しています..."));
+                    StateReporter.Report(new InstallationState(progressValueOrigin + 20, "AtsEX Caller InputDevice に AtsEX 本体の位置を指定しています..."));
 
-                    Kernel32.CreateSymbolicLink(Path.Combine(inputDevicesDirectory, "AtsEx"), atsExDirectory, Kernel32.SymbolicLinkType.SYMBOLIC_LINK_FLAG_DIRECTORY);
+                    using (StreamWriter sw = new StreamWriter(Path.Combine(inputDevicesDirectory, "AtsEx.Caller.InputDevice.txt"), false))
+                    {
+                        sw.Write(atsExDirectory);
+                        sw.Close();
+                    }
 
                     Task.Delay(DelayMilliseconds / 2).Wait();
                 }
