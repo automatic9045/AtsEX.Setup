@@ -38,7 +38,11 @@ namespace AtsEx.Setup.ViewModels
             {
                 Task.Run(async () =>
                 {
-                    await AtsExVersion.CommunicateAsync();
+                    try
+                    {
+                        await AtsExVersion.CommunicateAsync();
+                    }
+                    catch { }
                     Navigator.Instance.Page.Value = Setup.Page.Welcome;
                 });
             }
