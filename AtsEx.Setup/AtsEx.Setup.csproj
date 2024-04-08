@@ -113,11 +113,38 @@
     <Reference Include="Vanara.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
       <HintPath>..\packages\Vanara.Core.4.0.0\lib\net48\Vanara.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Vanara.PInvoke.ComCtl32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.ComCtl32.4.0.0\lib\net48\Vanara.PInvoke.ComCtl32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Cryptography, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Cryptography.4.0.0\lib\net48\Vanara.PInvoke.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Gdi32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Gdi32.4.0.0\lib\net48\Vanara.PInvoke.Gdi32.dll</HintPath>
+    </Reference>
     <Reference Include="Vanara.PInvoke.Kernel32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
       <HintPath>..\packages\Vanara.PInvoke.Kernel32.4.0.0\lib\net48\Vanara.PInvoke.Kernel32.dll</HintPath>
     </Reference>
+    <Reference Include="Vanara.PInvoke.Ole, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Ole.4.0.0\lib\net48\Vanara.PInvoke.Ole.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Rpc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Rpc.4.0.0\lib\net48\Vanara.PInvoke.Rpc.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Security.4.0.0\lib\net48\Vanara.PInvoke.Security.dll</HintPath>
+    </Reference>
     <Reference Include="Vanara.PInvoke.Shared, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
       <HintPath>..\packages\Vanara.PInvoke.Shared.4.0.0\lib\net48\Vanara.PInvoke.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Shell32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Shell32.4.0.0\lib\net48\Vanara.PInvoke.Shell32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.ShlwApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.ShlwApi.4.0.0\lib\net48\Vanara.PInvoke.ShlwApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.User32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.User32.4.0.0\lib\net48\Vanara.PInvoke.User32.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -179,6 +206,7 @@
     <Compile Include="ViewModels\SelectBveByProcessWindowViewModel.cs" />
     <Compile Include="ViewModels\SelectBvePageViewModelBase.cs" />
     <Compile Include="ViewModels\SelectScenarioDirectoryPageViewModel.cs" />
+    <Compile Include="ViewModels\StockIcons.cs" />
     <Compile Include="Views\AbortedPage.xaml.cs">
       <DependentUpon>AbortedPage.xaml</DependentUpon>
     </Compile>
