@@ -12,6 +12,7 @@ using Reactive.Bindings.Disposables;
 using Reactive.Bindings.Extensions;
 
 using AtsEx.Setup.Installing;
+using System.Security.Principal;
 
 namespace AtsEx.Setup.Models
 {
@@ -55,8 +56,22 @@ namespace AtsEx.Setup.Models
                         });
                     }
                 }
-                catch (UnauthorizedAccessException)
+                catch (UnauthorizedAccessException ex)
                 {
+                    // 管理者権限かどうかを確認
+                    using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
+                    {
+                        WindowsPrincipal principal = new WindowsPrincipal(identity);
+                        if (principal.IsInRole(WindowsBuiltInRole.Administrator))
+                        {
+                            Navigator.Instance.Abort($"エラーが発生しました。\n" +
+                                $"以下のことをお試しください。\n" +
+                                $"・ PC を再起動の上もう一度お試しください。\n" +
+                                $"・ ウィルス対策ソフトがインストールされている場合はこのインストーラーを許可リストに追加してください。\n" +
+                                $"\nエラーの詳細：\n{ex.Message}");
+                            return;
+                        }
+                    }
                     Navigator.Instance.Page.Value = Page.RequiresElevation;
                     return;
                 }
