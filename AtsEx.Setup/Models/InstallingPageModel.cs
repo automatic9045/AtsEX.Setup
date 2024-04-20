@@ -64,7 +64,11 @@ namespace AtsEx.Setup.Models
                         WindowsPrincipal principal = new WindowsPrincipal(identity);
                         if (principal.IsInRole(WindowsBuiltInRole.Administrator))
                         {
-                            Navigator.Instance.Abort($"{ex.Message}\n以下のことをお試しください。\n1. PC を再起動の上もう一度お試しください。\n2. ウィルス対策ソフトがインストールされている場合はこのインストーラーを許可リストに追加してください。");
+                            Navigator.Instance.Abort($"エラーが発生しました。\n" +
+                                $"以下のことをお試しください。\n" +
+                                $"・ PC を再起動の上もう一度お試しください。\n" +
+                                $"・ ウィルス対策ソフトがインストールされている場合はこのインストーラーを許可リストに追加してください。\n" +
+                                $"\nエラーの詳細：\n{ex.Message}");
                             return;
                         }
                     }
