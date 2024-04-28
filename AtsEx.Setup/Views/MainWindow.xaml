@@ -83,6 +83,9 @@
                 <DataTemplate DataType="{x:Type vm:SelectScenarioDirectoryPageViewModel}">
                     <local:SelectScenarioDirectoryPage/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:SdkPageViewModel}">
+                    <local:SdkPage/>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:ConfirmPageViewModel}">
                     <local:ConfirmPage/>
                 </DataTemplate>

@@ -44,7 +44,7 @@ namespace AtsEx.Setup.Models
             }
 
             TargetPath.ScenarioDirectory.Value = path;
-            Navigator.Instance.Page.Value = Page.Confirm;
+            Navigator.Instance.Page.Value = Page.Sdk;
         }
 
         public void Dispose()

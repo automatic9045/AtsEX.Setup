@@ -160,6 +160,7 @@
     <Compile Include="Installing\CallerInfo.cs" />
     <Compile Include="Installing\DirectoryExtensions.cs" />
     <Compile Include="Installing\ShortcutFactory.cs" />
+    <Compile Include="Models\SdkPageModel.cs" />
     <Compile Include="ViewModels\ElevationOption.cs" />
     <Compile Include="Installing\ArchivedPackage.cs" />
     <Compile Include="Installing\InstallationState.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="ViewModels\NotLatestVersionPageViewModel.cs" />
     <Compile Include="ViewModels\PreparingPageViewModel.cs" />
     <Compile Include="ViewModels\RequiresElevationPageViewModel.cs" />
+    <Compile Include="ViewModels\SdkPageViewModel.cs" />
     <Compile Include="ViewModels\SelectBve5PageViewModel.cs" />
     <Compile Include="ViewModels\SelectBve6PageViewModel.cs" />
     <Compile Include="ViewModels\SelectBveByProcessWindowViewModel.cs" />
@@ -227,6 +229,9 @@
     </Compile>
     <Compile Include="Views\RequiresElevationPage.xaml.cs">
       <DependentUpon>RequiresElevationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SdkPage.xaml.cs">
+      <DependentUpon>SdkPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectBve5Page.xaml.cs">
       <DependentUpon>SelectBve5Page.xaml</DependentUpon>
@@ -291,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SdkPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SelectBve5Page.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -320,6 +329,7 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Packages\Scenarios.zip" />
+    <EmbeddedResource Include="Packages\AtsEx.Sdk.zip" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

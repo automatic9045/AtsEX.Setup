@@ -16,6 +16,8 @@
         <TextBlock DockPanel.Dock="Top" Margin="16 4" Text="{Binding Bve5Path.Value}"/>
         <TextBlock DockPanel.Dock="Top" Margin="0 16 0 0" Text="シナリオフォルダの場所:"/>
         <TextBlock DockPanel.Dock="Top" Margin="16 4" Text="{Binding ScenarioDirectory.Value}"/>
+        <TextBlock DockPanel.Dock="Top" Margin="0 16 0 0" Text="AtsEX SDK:"/>
+        <TextBlock DockPanel.Dock="Top" Margin="16 4" Text="{Binding SdkOption.Value}"/>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource NavigationButton}"/>

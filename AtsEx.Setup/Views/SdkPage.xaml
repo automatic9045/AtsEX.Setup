@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="AtsEx.Setup.Views.SdkPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AtsEx.Setup.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="236" d:DesignWidth="736">
+    <UserControl.Resources>
+        <ResourceDictionary Source="General.xaml"/>
+    </UserControl.Resources>
+    <DockPanel LastChildFill="False">
+        <RadioButton DockPanel.Dock="Top" GroupName="Options" Content="SDK をインストールしない" IsChecked="{Binding DoNotInstallSdk.Value, Mode=OneWay}"/>
+        <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap">
+            AtsEX プラグインの開発を予定していない場合は、SDK は不要ですのでこちらを選択してください。
+        </TextBlock>
+        <RadioButton DockPanel.Dock="Top" Margin="0 16 0 0" GroupName="Options" Content="SDK をインストールする" IsChecked="{Binding InstallSdk.Value}"/>
+        <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap">
+            サンプルシナリオにて使用されている AtsEX プラグインのソースコードのセットが追加でインストールされます。ファイルはデスクトップに配置されます (後から移動しても問題ありません)。<LineBreak/>
+            このコンピュータで AtsEX プラグインを開発する場合はこちらを選択してください。
+        </TextBlock>
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <Button Content="&lt; 戻る" Style="{StaticResource NavigationButton}" Command="{Binding GoBackCommand}"/>
+            <Button Content="次へ &gt;" Style="{StaticResource NavigationButton}" Command="{Binding GoNextCommand}"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

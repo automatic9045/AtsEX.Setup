@@ -13,6 +13,7 @@ namespace AtsEx.Setup
         public static ReactivePropertySlim<string> Bve6Path { get; } = new ReactivePropertySlim<string>(null);
         public static ReactivePropertySlim<string> Bve5Path { get; } = new ReactivePropertySlim<string>(null);
         public static ReactivePropertySlim<string> ScenarioDirectory { get; } = new ReactivePropertySlim<string>(null);
+        public static ReactivePropertySlim<bool> InstallSdk { get; } = new ReactivePropertySlim<bool>(false);
 
         public static ReactivePropertySlim<bool> CopyBve { get; } = new ReactivePropertySlim<bool>(false);
     }

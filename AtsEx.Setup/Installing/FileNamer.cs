@@ -24,5 +24,18 @@ namespace AtsEx.Setup.Installing
 
             return pathWithoutExtension + extension;
         }
+
+        public static string CreateDirectoryNameInSequence(string pathBase)
+        {
+            string path = pathBase;
+            int i = 0;
+            while (Directory.Exists(path))
+            {
+                i++;
+                path = $"{pathBase} ({i})";
+            }
+
+            return path;
+        }
     }
 }

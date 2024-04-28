@@ -25,7 +25,7 @@ namespace AtsEx.Setup.Models
 
         public void GoBack()
         {
-            Navigator.Instance.Page.Value = Page.SelectScenarioDirectory;
+            Navigator.Instance.Page.Value = Page.Sdk;
         }
 
         public void BeginInstall()

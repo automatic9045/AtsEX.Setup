@@ -13,6 +13,8 @@ namespace AtsEx.Setup.Installing
     internal class Installer : IDisposable
     {
         private static readonly string CommonDocumentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments);
+        private static readonly string DesktopDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
         private static readonly string Namespace = "AtsEx.Setup.Packages";
         private static readonly int DelayMilliseconds = 500;
 
@@ -123,6 +125,19 @@ namespace AtsEx.Setup.Installing
 
                 ArchivedPackage archive = ArchivedPackage.FromResource($"{Namespace}.AtsEx.zip");
                 archive.ExtractAndLocate(atsExDirectory);
+
+                Task.Delay(DelayMilliseconds).Wait();
+            }
+
+            if (TargetPath.InstallSdk.Value)
+            {
+                StateReporter.Report(new InstallationState(270, "AtsEX SDK を展開・配置しています..."));
+
+                string sdkDirectory = Path.Combine(DesktopDirectory, "AtsEX SDK");
+                string destPath = FileNamer.CreateDirectoryNameInSequence(sdkDirectory);
+
+                ArchivedPackage archive = ArchivedPackage.FromResource($"{Namespace}.AtsEx.Sdk.zip");
+                archive.ExtractAndLocate(destPath);
 
                 Task.Delay(DelayMilliseconds).Wait();
             }

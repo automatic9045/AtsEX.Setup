@@ -15,6 +15,7 @@ namespace AtsEx.Setup
         SelectBve6,
         SelectBve5,
         SelectScenarioDirectory,
+        Sdk,
         Confirm,
         Installing,
         RequiresElevation,

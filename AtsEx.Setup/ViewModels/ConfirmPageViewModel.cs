@@ -27,6 +27,7 @@ namespace AtsEx.Setup.ViewModels
         public ReadOnlyReactivePropertySlim<string> Bve6Path { get; }
         public ReadOnlyReactivePropertySlim<string> Bve5Path { get; }
         public ReadOnlyReactivePropertySlim<string> ScenarioDirectory { get; }
+        public ReadOnlyReactivePropertySlim<string> SdkOption { get; }
 
         public ReactiveCommand GoBackCommand { get; }
         public ReactiveCommand BeginInstallCommand { get; }
@@ -38,6 +39,7 @@ namespace AtsEx.Setup.ViewModels
             Bve6Path = TargetPath.Bve6Path.Select(x => x ?? "(AtsEX を BVE Trainsim 6 にインストールしない)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
             Bve5Path = TargetPath.Bve5Path.Select(x => x ?? "(AtsEX を BVE Trainsim 5 にインストールしない)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
             ScenarioDirectory = TargetPath.ScenarioDirectory.Select(x => x ?? "(AtsEX サンプルをインストールしない)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+            SdkOption = TargetPath.InstallSdk.Select(x => "SDK をインストール" + (x ? "する" : "しない")).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             GoBackCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.GoBack);
             BeginInstallCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.BeginInstall);
