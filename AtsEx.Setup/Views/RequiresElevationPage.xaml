@@ -28,18 +28,25 @@
                 </Style.Triggers>
             </Style>
         </DockPanel.Resources>
-        <RadioButton DockPanel.Dock="Top" GroupName="Options" Content="管理者として続行 【推奨】"
-                     IsChecked="{Binding Option.Value, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=RunAsAdmin}"/>
+        <RadioButton DockPanel.Dock="Top" GroupName="Options"
+                     IsChecked="{Binding Option.Value, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=RunAsAdmin}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding ShieldIcon.Value}" Stretch="None"/>
+                <TextBlock Margin="2 0 0 0" Text="管理者として続行 【推奨】"/>
+            </StackPanel>
+        </RadioButton>
         <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap">
             管理者として、前のページで指定したフォルダへ AtsEX をインストールします。<LineBreak/>
             このオプションには管理者権限が必要なため、例えば家庭の共用 PC をいちユーザーとして利用している場合は、PC の管理者の許可を得る必要があります。
             許可を得られない場合は以下の 2 オプションのいずれかを選択してください。
         </TextBlock>
-        <StackPanel DockPanel.Dock="Top" Margin="0 16 0 0" Orientation="Horizontal" IsEnabled="{Binding CanUseSimpleInstall.Value}">
-            <RadioButton GroupName="Options" Content="シンプルインストール"
-                         IsChecked="{Binding Option.Value, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SimpleInstall}"/>
-            <TextBlock Margin="4 0 0 0" FontWeight="Bold">※所定のバージョンの AtsEX が既にインストールされている必要があります</TextBlock>
-        </StackPanel>
+        <RadioButton DockPanel.Dock="Top" Margin="0 16 0 0" GroupName="Options" IsEnabled="{Binding CanUseSimpleInstall.Value}"
+                     IsChecked="{Binding Option.Value, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SimpleInstall}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>シンプルインストール</TextBlock>
+                <TextBlock Margin="4 0 0 0" FontWeight="Bold">※所定のバージョンの AtsEX が既にインストールされている必要があります</TextBlock>
+            </StackPanel>
+        </RadioButton>
         <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap" IsEnabled="{Binding CanUseSimpleInstall.Value}">
             インストールに管理者権限が必要なファイル (AtsEX Caller InputDevice など) を新たにインストールせず、既存のファイルを流用します。<LineBreak/>
             このオプションでインストールがスキップされるファイルは最小限であり、AtsEX の新機能の大半は利用することができます。

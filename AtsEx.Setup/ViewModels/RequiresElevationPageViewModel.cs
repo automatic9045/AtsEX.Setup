@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 using Reactive.Bindings;
 using Reactive.Bindings.Disposables;
@@ -28,6 +29,7 @@ namespace AtsEx.Setup.ViewModels
         public ReadOnlyReactivePropertySlim<bool> CanUseCopyBve { get; }
 
         public ReactivePropertySlim<ElevationOption> Option { get; }
+        public ReactivePropertySlim<ImageSource> ShieldIcon { get; }
 
         public ReactiveCommand GoBackCommand { get; }
         public ReactiveCommand GoNextCommand { get; }
@@ -49,6 +51,7 @@ namespace AtsEx.Setup.ViewModels
                 .ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             Option = new ReactivePropertySlim<ElevationOption>(ElevationOption.RunAsAdmin).AddTo(Disposables);
+            ShieldIcon = new ReactivePropertySlim<ImageSource>(StockIcons.GetShieldIcon()).AddTo(Disposables);
 
             GoBackCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.GoBack);
             GoNextCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(() =>
