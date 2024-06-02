@@ -79,8 +79,8 @@ namespace AtsEx.Setup.Models
                 {
                     switch (ex.HResult)
                     {
-                        case -2147024864: // 0x80070020
-                            Navigator.Instance.Abort($"{ex.Message}\nPC を再起動の上もう一度お試しください。");
+                        case unchecked((int)0x80070020):
+                            Navigator.Instance.Abort($"{ex.Message}\n当該リソースを解放するか、PC を再起動の上もう一度お試しください。");
                             return;
                         default:
                             throw;
