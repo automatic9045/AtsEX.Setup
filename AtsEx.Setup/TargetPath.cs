@@ -10,9 +10,9 @@ namespace AtsEx.Setup
 {
     internal static class TargetPath
     {
-        public static ReactivePropertySlim<string> Bve6Path { get; } = new ReactivePropertySlim<string>(null);
-        public static ReactivePropertySlim<string> Bve5Path { get; } = new ReactivePropertySlim<string>(null);
-        public static ReactivePropertySlim<string> ScenarioDirectory { get; } = new ReactivePropertySlim<string>(null);
+        public static ReactivePropertySlim<InstallationTarget> Bve6Path { get; } = new ReactivePropertySlim<InstallationTarget>(InstallationTarget.NotIdentified);
+        public static ReactivePropertySlim<InstallationTarget> Bve5Path { get; } = new ReactivePropertySlim<InstallationTarget>(InstallationTarget.NotIdentified);
+        public static ReactivePropertySlim<InstallationTarget> ScenarioDirectory { get; } = new ReactivePropertySlim<InstallationTarget>(InstallationTarget.NotIdentified);
         public static ReactivePropertySlim<bool> InstallSdk { get; } = new ReactivePropertySlim<bool>(false);
 
         public static ReactivePropertySlim<bool> CopyBve { get; } = new ReactivePropertySlim<bool>(false);

@@ -39,8 +39,8 @@ namespace AtsEx.Setup.Models
 
         public void SimpleInstall()
         {
-            TargetPath.Bve6Path.Value = null;
-            TargetPath.Bve5Path.Value = null;
+            TargetPath.Bve6Path.Value.MarkAsInstalled();
+            TargetPath.Bve5Path.Value.MarkAsInstalled();
 
             Navigator.Instance.Page.Value = Page.Installing;
         }

@@ -40,14 +40,14 @@ namespace AtsEx.Setup.ViewModels
         {
             CanUseSimpleInstall = Observable.Merge(TargetPath.Bve6Path, TargetPath.Bve5Path).Select(_ =>
             {
-                bool? bve6 = TargetPath.Bve6Path.Value is null ? true : CallerInfo.TryCreateFromBvePath(TargetPath.Bve6Path.Value)?.CanUseSimpleInstall;
-                bool? bve5 = TargetPath.Bve5Path.Value is null ? true : CallerInfo.TryCreateFromBvePath(TargetPath.Bve5Path.Value)?.CanUseSimpleInstall;
+                bool? bve6 = TargetPath.Bve6Path.Value.HasInstalled ? true : CallerInfo.TryCreateFromBvePath(TargetPath.Bve6Path.Value.Path)?.CanUseSimpleInstall;
+                bool? bve5 = TargetPath.Bve5Path.Value.HasInstalled ? true : CallerInfo.TryCreateFromBvePath(TargetPath.Bve5Path.Value.Path)?.CanUseSimpleInstall;
 
                 return (bve6 ?? false) && (bve5 ?? false);
             }).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             CanUseCopyBve = Observable.Merge(TargetPath.Bve6Path, TargetPath.Bve5Path)
-                .Select(_ => !(TargetPath.Bve6Path.Value is null && TargetPath.Bve5Path.Value is null))
+                .Select(_ => !(TargetPath.Bve6Path.Value.HasInstalled && TargetPath.Bve5Path.Value.HasInstalled))
                 .ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             Option = new ReactivePropertySlim<ElevationOption>(ElevationOption.RunAsAdmin).AddTo(Disposables);

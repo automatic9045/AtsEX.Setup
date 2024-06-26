@@ -43,7 +43,7 @@ namespace AtsEx.Setup.Models
                 return;
             }
 
-            TargetPath.ScenarioDirectory.Value = path;
+            TargetPath.ScenarioDirectory.Value = new InstallationTarget(path);
             Navigator.Instance.Page.Value = Page.Sdk;
         }
 

@@ -157,6 +157,7 @@
     </ApplicationDefinition>
     <Compile Include="BveFileError.cs" />
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="InstallationTarget.cs" />
     <Compile Include="Installing\CallerInfo.cs" />
     <Compile Include="Installing\DirectoryExtensions.cs" />
     <Compile Include="Installing\ShortcutFactory.cs" />

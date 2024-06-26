@@ -22,7 +22,7 @@ namespace AtsEx.Setup.Installing
             {
                 FileName = Assembly.GetExecutingAssembly().Location,
                 Verb = "RunAs",
-                Arguments = "n" + CreateOptionText("-6", TargetPath.Bve6Path.Value) + CreateOptionText("-5", TargetPath.Bve5Path.Value) + CreateOptionText("-s", TargetPath.ScenarioDirectory.Value),
+                Arguments = "n" + CreateOptionText("-6", TargetPath.Bve6Path.Value.Path) + CreateOptionText("-5", TargetPath.Bve5Path.Value.Path) + CreateOptionText("-s", TargetPath.ScenarioDirectory.Value.Path),
                 ErrorDialog = true,
                 ErrorDialogParentHandle = helper.Handle,
             };

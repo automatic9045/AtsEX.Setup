@@ -36,9 +36,9 @@ namespace AtsEx.Setup.ViewModels
 
         public ConfirmPageViewModel()
         {
-            Bve6Path = TargetPath.Bve6Path.Select(x => x ?? "(AtsEX を BVE Trainsim 6 にインストールしない)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
-            Bve5Path = TargetPath.Bve5Path.Select(x => x ?? "(AtsEX を BVE Trainsim 5 にインストールしない)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
-            ScenarioDirectory = TargetPath.ScenarioDirectory.Select(x => x ?? "(AtsEX サンプルをインストールしない)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+            Bve6Path = TargetPath.Bve6Path.Select(x => x.HasInstalled ? "(AtsEX を BVE Trainsim 6 にインストールしない)" : x.Path).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+            Bve5Path = TargetPath.Bve5Path.Select(x => x.HasInstalled ? "(AtsEX を BVE Trainsim 5 にインストールしない)" : x.Path).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
+            ScenarioDirectory = TargetPath.ScenarioDirectory.Select(x => x.HasInstalled ? "(AtsEX サンプルをインストールしない)" : x.Path).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
             SdkOption = TargetPath.InstallSdk.Select(x => "SDK をインストール" + (x ? "する" : "しない")).ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             GoBackCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(Model.GoBack);

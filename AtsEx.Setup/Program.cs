@@ -39,9 +39,9 @@ namespace AtsEx.Setup
                     {
                         isInteractive = false;
 
-                        TargetPath.Bve6Path.Value = bve6Path;
-                        TargetPath.Bve5Path.Value = bve5Path;
-                        TargetPath.ScenarioDirectory.Value = scenarioDirectory;
+                        TargetPath.Bve6Path.Value = new InstallationTarget(bve6Path);
+                        TargetPath.Bve5Path.Value = new InstallationTarget(bve5Path);
+                        TargetPath.ScenarioDirectory.Value = new InstallationTarget(scenarioDirectory);
                     }, bve6PathOption, bve5PathOption, scenarioDirectoryOption);
                 }
 

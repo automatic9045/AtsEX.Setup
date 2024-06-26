@@ -62,26 +62,25 @@ namespace AtsEx.Setup.Installing
 
                 Package callerPackage = Package.FromResource($"{Namespace}.{CallerInfo.FileName}");
 
-                if (!(TargetPath.Bve6Path.Value is null))
+                if (!TargetPath.Bve6Path.Value.HasInstalled)
                 {
-                    LocateCallerAndLink(TargetPath.Bve6Path.Value, 6, 120);
+                    LocateCallerAndLink(TargetPath.Bve6Path.Value.Path, 6, 120);
 
-                    TargetPath.Bve6Path.Value = null;
+                    TargetPath.Bve6Path.Value.MarkAsInstalled();
                 }
 
-                if (!(TargetPath.Bve5Path.Value is null))
+                if (!TargetPath.Bve5Path.Value.HasInstalled)
                 {
-                    LocateCallerAndLink(TargetPath.Bve5Path.Value, 5, 160);
+                    LocateCallerAndLink(TargetPath.Bve5Path.Value.Path, 5, 160);
 
-                    string bve5FileName = Path.GetFileName(TargetPath.Bve5Path.Value);
+                    string bve5FileName = Path.GetFileName(TargetPath.Bve5Path.Value.Path);
                     StateReporter.Report(new InstallationState(190, $"Bve Trainsim 5 の {bve5FileName}.config を編集しています..."));
 
                     Package configPackage = Package.FromResource($"{Namespace}.Bve5Config.xml");
                     configPackage.Locate($"{TargetPath.Bve5Path.Value}.config");
 
                     Task.Delay(DelayMilliseconds).Wait();
-
-                    TargetPath.Bve5Path.Value = null;
+                    TargetPath.Bve5Path.Value.MarkAsInstalled();
                 }
 
                 void LocateCallerAndLink(string bvePath, int bveVersion, int progressValueOrigin)
@@ -151,13 +150,13 @@ namespace AtsEx.Setup.Installing
                     ReportState(0, "このユーザーで BVE Trainsim が使用されているか確認しています...");
                     Task.Delay(DelayMilliseconds / 4).Wait();
 
-                    if (!(TargetPath.Bve6Path.Value is null))
+                    if (!TargetPath.Bve6Path.Value.HasInstalled)
                     {
                         ReportState(0.2, "BVE Trainsim 6 の設定ファイルを編集しています...");
                         EditPreferences("BveTs6.Preferences.xml");
                     }
 
-                    if (!(TargetPath.Bve5Path.Value is null))
+                    if (!TargetPath.Bve5Path.Value.HasInstalled)
                     {
                         ReportState(0.6, "BVE Trainsim 5 の設定ファイルを編集しています...");
                         EditPreferences("Preferences.xml");
@@ -183,9 +182,9 @@ namespace AtsEx.Setup.Installing
                 }
             }
 
-            if (!(TargetPath.ScenarioDirectory.Value is null))
+            if (!TargetPath.ScenarioDirectory.Value.HasInstalled)
             {
-                string sampleDirectory = Path.Combine(TargetPath.ScenarioDirectory.Value, "AtsEx.Samples");
+                string sampleDirectory = Path.Combine(TargetPath.ScenarioDirectory.Value.Path, "AtsEx.Samples");
                 if (Directory.Exists(sampleDirectory))
                 {
                     StateReporter.Report(new InstallationState(400, "シナリオフォルダに配置されている既存の AtsEX サンプルシナリオのバックアップを作成しています..."));
@@ -197,9 +196,10 @@ namespace AtsEx.Setup.Installing
                 StateReporter.Report(new InstallationState(420, "AtsEX サンプルシナリオを展開・配置しています..."));
 
                 ArchivedPackage archive = ArchivedPackage.FromResource($"{Namespace}.Scenarios.zip");
-                archive.ExtractAndLocate(TargetPath.ScenarioDirectory.Value);
+                archive.ExtractAndLocate(TargetPath.ScenarioDirectory.Value.Path);
 
                 Task.Delay(DelayMilliseconds).Wait();
+                TargetPath.ScenarioDirectory.Value.MarkAsInstalled();
             }
 
             StateReporter.Report(new InstallationState(500, "インストール処理を完了させています..."));

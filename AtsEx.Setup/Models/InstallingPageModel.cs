@@ -38,15 +38,15 @@ namespace AtsEx.Setup.Models
                         {
                             if (TargetPath.CopyBve.Value)
                             {
-                                if (TargetPath.Bve6Path.Value is null)
+                                if (TargetPath.Bve6Path.Value.HasInstalled)
                                 {
-                                    string newBve5Path = installer.CopyBve(TargetPath.Bve5Path.Value, 5);
-                                    TargetPath.Bve5Path.Value = newBve5Path;
+                                    string newBve5Path = installer.CopyBve(TargetPath.Bve5Path.Value.Path, 5);
+                                    TargetPath.Bve5Path.Value = new InstallationTarget(newBve5Path);
                                 }
                                 else
                                 {
-                                    string newBve6Path = installer.CopyBve(TargetPath.Bve6Path.Value, 6);
-                                    TargetPath.Bve6Path.Value = newBve6Path;
+                                    string newBve6Path = installer.CopyBve(TargetPath.Bve6Path.Value.Path, 6);
+                                    TargetPath.Bve6Path.Value = new InstallationTarget(newBve6Path);
                                 }
 
                                 TargetPath.CopyBve.Value = false;
