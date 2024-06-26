@@ -16,7 +16,9 @@
         </TextBlock>
         <RadioButton DockPanel.Dock="Top" Margin="0 16 0 0" GroupName="Options" Content="SDK をインストールする" IsChecked="{Binding InstallSdk.Value}"/>
         <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap">
-            サンプルシナリオにて使用されている AtsEX プラグインのソースコードのセットが追加でインストールされます。ファイルはデスクトップに配置されます (後から移動しても問題ありません)。<LineBreak/>
+            サンプルシナリオにて使用されている AtsEX プラグインのソースコードのセットが追加でインストールされます。ファイルはデスクトップに配置されます (後から移動しても問題ありません)。
+        </TextBlock>
+        <TextBlock DockPanel.Dock="Top" Margin="16 4" TextAlignment="Justify" TextWrapping="Wrap">
             このコンピュータで AtsEX プラグインを開発する場合はこちらを選択してください。
         </TextBlock>
 

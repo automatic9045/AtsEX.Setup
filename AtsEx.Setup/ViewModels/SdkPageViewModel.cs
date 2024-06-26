@@ -21,7 +21,7 @@ namespace AtsEx.Setup.ViewModels
         private readonly CompositeDisposable Disposables = new CompositeDisposable();
         private readonly SdkPageModel Model = new SdkPageModel();
 
-        public string Caption { get; } = "AtsEX SDK";
+        public string Caption { get; } = "AtsEX プラグインの開発を予定されていますか?";
         public string Description { get; } = "AtsEX SDK は、AtsEX プラグインの開発を支援するパッケージです。AtsEX プラグインを開発される場合はインストールをおすすめします。";
 
         public ReactivePropertySlim<bool> InstallSdk { get; }
