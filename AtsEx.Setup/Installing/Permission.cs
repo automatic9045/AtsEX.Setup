@@ -17,12 +17,17 @@ namespace AtsEx.Setup.Installing
     {
         public static bool TryElevate()
         {
+            string arguments = "n"
+                + CreateOptionText("--bve6", TargetPath.Bve6Path.Value)
+                + CreateOptionText("--bve5", TargetPath.Bve5Path.Value)
+                + CreateOptionText("--scenario", TargetPath.ScenarioDirectory.Value);
+
             WindowInteropHelper helper = new WindowInteropHelper(Application.Current.MainWindow);
             ProcessStartInfo processStartInfo = new ProcessStartInfo()
             {
                 FileName = Assembly.GetExecutingAssembly().Location,
                 Verb = "RunAs",
-                Arguments = "n" + CreateOptionText("-6", TargetPath.Bve6Path.Value.Path) + CreateOptionText("-5", TargetPath.Bve5Path.Value.Path) + CreateOptionText("-s", TargetPath.ScenarioDirectory.Value.Path),
+                Arguments = arguments,
                 ErrorDialog = true,
                 ErrorDialogParentHandle = helper.Handle,
             };
@@ -44,7 +49,8 @@ namespace AtsEx.Setup.Installing
             }
 
 
-            string CreateOptionText(string key, string value) => value is null ? "" : $" {key} \"{value}\"";
+            string CreateOptionText(string key, InstallationTarget target)
+                => $" {key} \"{target.Path}\"{(target != InstallationTarget.NotIdentified && target.HasInstalled ? $" {key}-for-log" : string.Empty)}";
         }
     }
 }

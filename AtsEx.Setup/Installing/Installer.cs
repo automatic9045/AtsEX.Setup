@@ -55,8 +55,6 @@ namespace AtsEx.Setup.Installing
 
         public void Install()
         {
-            string atsExDirectory = Path.Combine(CommonDocumentsDirectory, "AtsEx");
-
             {
                 StateReporter.Report(new InstallationState(100, "AtsEX Caller InputDevice を準備しています..."));
 
@@ -111,7 +109,7 @@ namespace AtsEx.Setup.Installing
 
                     using (StreamWriter sw = new StreamWriter(Path.Combine(inputDevicesDirectory, "AtsEx.Caller.InputDevice.txt"), false))
                     {
-                        sw.Write(atsExDirectory);
+                        sw.Write(ApplicationInfo.AtsExDirectory);
                         sw.Close();
                     }
 
@@ -123,7 +121,7 @@ namespace AtsEx.Setup.Installing
                 StateReporter.Report(new InstallationState(200, "AtsEX 本体パッケージを展開・配置しています..."));
 
                 ArchivedPackage archive = ArchivedPackage.FromResource($"{Namespace}.AtsEx.zip");
-                archive.ExtractAndLocate(atsExDirectory);
+                archive.ExtractAndLocate(ApplicationInfo.AtsExDirectory);
 
                 Task.Delay(DelayMilliseconds).Wait();
             }
@@ -200,6 +198,25 @@ namespace AtsEx.Setup.Installing
 
                 Task.Delay(DelayMilliseconds).Wait();
                 TargetPath.ScenarioDirectory.Value.MarkAsInstalled();
+            }
+
+            {
+                StateReporter.Report(new InstallationState(470, "パッケージの配置先を記録しています..."));
+
+                Data.InstallationSettings settings = new Data.InstallationSettings()
+                {
+                    Bve6Path = TargetPath.Bve6Path.Value.Path,
+                    Bve5Path = TargetPath.Bve5Path.Value.Path,
+                    ScenarioDirectory = TargetPath.ScenarioDirectory.Value.Path,
+                };
+
+                try
+                {
+                    settings.Save();
+                }
+                catch { }
+
+                Task.Delay(DelayMilliseconds / 2).Wait();
             }
 
             StateReporter.Report(new InstallationState(500, "インストール処理を完了させています..."));

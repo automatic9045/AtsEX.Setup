@@ -37,10 +37,17 @@ namespace AtsEx.Setup.ViewModels
 
         internal SelectScenarioDirectoryPageViewModel()
         {
+            string lastInstalledDirectory = Data.InstallationSettings.Loaded.ScenarioDirectory;
+
             string document = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string defaultScenarioDirectory = System.IO.Path.Combine(document, @"BveTs\Scenarios");
 
-            _Path = new ReactivePropertySlim<string>(Directory.Exists(defaultScenarioDirectory) ? defaultScenarioDirectory : null);
+            string initialDirectory =
+                Directory.Exists(lastInstalledDirectory) ? lastInstalledDirectory
+                : Directory.Exists(defaultScenarioDirectory) ? defaultScenarioDirectory
+                : null;
+
+            _Path = new ReactivePropertySlim<string>(initialDirectory);
             Path = _Path.Select(x => x ?? "(フォルダ未選択)").ToReadOnlyReactivePropertySlim().AddTo(Disposables);
 
             OpenFolderCommand = new ReactiveCommand().AddTo(Disposables).WithSubscribe(() =>

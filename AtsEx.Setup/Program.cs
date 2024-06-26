@@ -35,14 +35,32 @@ namespace AtsEx.Setup
                     nonInteractiveCommand.AddOption(bve5PathOption);
                     nonInteractiveCommand.AddOption(scenarioDirectoryOption);
 
-                    nonInteractiveCommand.SetHandler((bve6Path, bve5Path, scenarioDirectory) =>
+                    Option<bool> bve6PathForLogOption = CreateFlagOption("--bve6-for-log");
+                    Option<bool> bve5PathForLogOption = CreateFlagOption("--bve5-for-log");
+                    Option<bool> scenarioDirectoryForLogOption = CreateFlagOption("--scenario-for-log");
+
+                    nonInteractiveCommand.AddOption(bve6PathForLogOption);
+                    nonInteractiveCommand.AddOption(bve5PathForLogOption);
+                    nonInteractiveCommand.AddOption(scenarioDirectoryForLogOption);
+
+                    nonInteractiveCommand.SetHandler((bve6Path, bve5Path, scenarioDirectory, isBve6PathForLog, isBve5PathForLog, isScenarioDirectoryForLog) =>
                     {
                         isInteractive = false;
 
-                        TargetPath.Bve6Path.Value = new InstallationTarget(bve6Path);
-                        TargetPath.Bve5Path.Value = new InstallationTarget(bve5Path);
-                        TargetPath.ScenarioDirectory.Value = new InstallationTarget(scenarioDirectory);
-                    }, bve6PathOption, bve5PathOption, scenarioDirectoryOption);
+                        TargetPath.Bve6Path.Value = new InstallationTarget(bve6Path, isBve6PathForLog);
+                        TargetPath.Bve5Path.Value = new InstallationTarget(bve5Path, isBve5PathForLog);
+                        TargetPath.ScenarioDirectory.Value = new InstallationTarget(scenarioDirectory, isScenarioDirectoryForLog);
+                    }, bve6PathOption, bve5PathOption, scenarioDirectoryOption, bve6PathForLogOption, bve5PathForLogOption, scenarioDirectoryForLogOption);
+
+
+                    Option<bool> CreateFlagOption(string name)
+                    {
+                        return new Option<bool>(name)
+                        {
+                            IsHidden = true,
+                            Arity = ArgumentArity.Zero,
+                        };
+                    }
                 }
 
                 rootCommand.AddCommand(nonInteractiveCommand);

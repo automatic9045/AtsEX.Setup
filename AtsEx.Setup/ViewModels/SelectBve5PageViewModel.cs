@@ -13,7 +13,7 @@ namespace AtsEx.Setup.ViewModels
     {
         private protected override BveFileErrorConverter Converter { get; } = new SelectBve5ErrorConverter();
 
-        public SelectBve5PageViewModel() : base(new SelectBve5PageModel(), 5, GetInitialPath())
+        public SelectBve5PageViewModel() : base(new SelectBve5PageModel(), 5, Data.InstallationSettings.Loaded.Bve5Path, GetInitialPath())
         {
         }
 
