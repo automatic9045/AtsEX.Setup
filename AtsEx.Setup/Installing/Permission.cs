@@ -20,7 +20,8 @@ namespace AtsEx.Setup.Installing
             string arguments = "n"
                 + CreateOptionText("--bve6", TargetPath.Bve6Path.Value)
                 + CreateOptionText("--bve5", TargetPath.Bve5Path.Value)
-                + CreateOptionText("--scenario", TargetPath.ScenarioDirectory.Value);
+                + CreateOptionText("--scenario", TargetPath.ScenarioDirectory.Value)
+                + (TargetPath.InstallSdk.Value ? " --sdk" : string.Empty);
 
             WindowInteropHelper helper = new WindowInteropHelper(Application.Current.MainWindow);
             ProcessStartInfo processStartInfo = new ProcessStartInfo()
