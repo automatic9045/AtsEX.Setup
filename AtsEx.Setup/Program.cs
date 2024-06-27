@@ -31,9 +31,16 @@ namespace AtsEx.Setup
                     Option<string> scenarioDirectoryOption = new Option<string>("--scenario", "AtsEX サンプルシナリオを配置するシナリオフォルダを指定します。");
                     scenarioDirectoryOption.AddAlias("-s");
 
+                    Option<bool> installSdkOption = new Option<bool>("--sdk", "AtsEX SDK をインストールします。")
+                    {
+                        Arity = ArgumentArity.Zero,
+                    };
+                    installSdkOption.AddAlias("-d");
+
                     nonInteractiveCommand.AddOption(bve6PathOption);
                     nonInteractiveCommand.AddOption(bve5PathOption);
                     nonInteractiveCommand.AddOption(scenarioDirectoryOption);
+                    nonInteractiveCommand.AddOption(installSdkOption);
 
                     Option<bool> bve6PathForLogOption = CreateFlagOption("--bve6-for-log");
                     Option<bool> bve5PathForLogOption = CreateFlagOption("--bve5-for-log");
@@ -43,14 +50,15 @@ namespace AtsEx.Setup
                     nonInteractiveCommand.AddOption(bve5PathForLogOption);
                     nonInteractiveCommand.AddOption(scenarioDirectoryForLogOption);
 
-                    nonInteractiveCommand.SetHandler((bve6Path, bve5Path, scenarioDirectory, isBve6PathForLog, isBve5PathForLog, isScenarioDirectoryForLog) =>
+                    nonInteractiveCommand.SetHandler((bve6Path, bve5Path, scenarioDirectory, installSdk, isBve6PathForLog, isBve5PathForLog, isScenarioDirectoryForLog) =>
                     {
                         isInteractive = false;
 
                         TargetPath.Bve6Path.Value = new InstallationTarget(bve6Path, isBve6PathForLog);
                         TargetPath.Bve5Path.Value = new InstallationTarget(bve5Path, isBve5PathForLog);
                         TargetPath.ScenarioDirectory.Value = new InstallationTarget(scenarioDirectory, isScenarioDirectoryForLog);
-                    }, bve6PathOption, bve5PathOption, scenarioDirectoryOption, bve6PathForLogOption, bve5PathForLogOption, scenarioDirectoryForLogOption);
+                        TargetPath.InstallSdk.Value = installSdk;
+                    }, bve6PathOption, bve5PathOption, scenarioDirectoryOption, installSdkOption, bve6PathForLogOption, bve5PathForLogOption, scenarioDirectoryForLogOption);
 
 
                     Option<bool> CreateFlagOption(string name)
