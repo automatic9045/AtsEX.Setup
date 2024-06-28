@@ -42,8 +42,11 @@ namespace AtsEx.Setup.Models
                 MessageBox.Show($"指定されたフォルダ '{path}' は存在しません。\nもう一度よくご確認ください。", "AtsEX セットアップウィザード", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            else
+            {
+                TargetPath.ScenarioDirectory.Value = new InstallationTarget(path);
+            }
 
-            TargetPath.ScenarioDirectory.Value = new InstallationTarget(path);
             Navigator.Instance.Page.Value = Page.Sdk;
         }
 

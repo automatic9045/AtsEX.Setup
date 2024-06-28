@@ -36,8 +36,11 @@ namespace AtsEx.Setup.Models
                     return;
                 }
             }
+            else
+            {
+                TargetPath.Bve5Path.Value = new InstallationTarget(path);
+            }
 
-            TargetPath.Bve5Path.Value = new InstallationTarget(path);
             Navigator.Instance.Page.Value = Page.SelectScenarioDirectory;
         }
 
