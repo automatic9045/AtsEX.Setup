@@ -71,11 +71,12 @@ namespace AtsEx.Setup.Installing
                 {
                     LocateCallerAndLink(TargetPath.Bve5Path.Value.Path, 5, 160);
 
-                    string bve5FileName = Path.GetFileName(TargetPath.Bve5Path.Value.Path);
+                    string bve5Path = TargetPath.Bve5Path.Value.Path;
+                    string bve5FileName = Path.GetFileName(bve5Path);
                     StateReporter.Report(new InstallationState(190, $"Bve Trainsim 5 の {bve5FileName}.config を編集しています..."));
 
                     Package configPackage = Package.FromResource($"{Namespace}.Bve5Config.xml");
-                    configPackage.Locate($"{TargetPath.Bve5Path.Value}.config");
+                    configPackage.Locate($"{bve5Path}.config");
 
                     Task.Delay(DelayMilliseconds).Wait();
                     TargetPath.Bve5Path.Value.MarkAsInstalled();

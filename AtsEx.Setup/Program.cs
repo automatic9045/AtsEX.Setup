@@ -54,9 +54,9 @@ namespace AtsEx.Setup
                     {
                         isInteractive = false;
 
-                        TargetPath.Bve6Path.Value = new InstallationTarget(bve6Path, isBve6PathForLog);
-                        TargetPath.Bve5Path.Value = new InstallationTarget(bve5Path, isBve5PathForLog);
-                        TargetPath.ScenarioDirectory.Value = new InstallationTarget(scenarioDirectory, isScenarioDirectoryForLog);
+                        TargetPath.Bve6Path.Value = CreateTarget(bve6Path, isBve6PathForLog);
+                        TargetPath.Bve5Path.Value = CreateTarget(bve5Path, isBve5PathForLog);
+                        TargetPath.ScenarioDirectory.Value = CreateTarget(scenarioDirectory, isScenarioDirectoryForLog);
                         TargetPath.InstallSdk.Value = installSdk;
                     }, bve6PathOption, bve5PathOption, scenarioDirectoryOption, installSdkOption, bve6PathForLogOption, bve5PathForLogOption, scenarioDirectoryForLogOption);
 
@@ -68,6 +68,15 @@ namespace AtsEx.Setup
                             IsHidden = true,
                             Arity = ArgumentArity.Zero,
                         };
+                    }
+
+                    InstallationTarget CreateTarget(string path, bool isForLog)
+                    {
+                        if (path is null) return InstallationTarget.NotIdentified;
+                        if (path == string.Empty) return InstallationTarget.NotIdentified;
+
+                        InstallationTarget result = new InstallationTarget(path, isForLog);
+                        return result;
                     }
                 }
 
