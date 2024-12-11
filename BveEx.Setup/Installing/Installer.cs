@@ -149,13 +149,13 @@ namespace BveEx.Setup.Installing
                     ReportState(0, "このユーザーで BVE Trainsim が使用されているか確認しています...");
                     Task.Delay(DelayMilliseconds / 4).Wait();
 
-                    if (!TargetPath.Bve6Path.Value.HasInstalled)
+                    if (TargetPath.Bve6Path.Value.HasInstalled)
                     {
                         ReportState(0.2, "BVE Trainsim 6 の設定ファイルを編集しています...");
                         EditPreferences("BveTs6.Preferences.xml");
                     }
 
-                    if (!TargetPath.Bve5Path.Value.HasInstalled)
+                    if (TargetPath.Bve5Path.Value.HasInstalled)
                     {
                         ReportState(0.6, "BVE Trainsim 5 の設定ファイルを編集しています...");
                         EditPreferences("Preferences.xml");
