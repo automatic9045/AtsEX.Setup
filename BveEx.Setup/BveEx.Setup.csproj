@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AE3B0D6E-57B0-40CA-9F1A-8D4335559379}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BveEx.Setup</RootNamespace>
+    <AssemblyName>BveEx.Setup</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BveEx.Setup.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.77\lib\net462\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Octokit, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0be8860aee462442, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.10.0.0\lib\netstandard2.0\Octokit.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty, Version=9.5.0.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.9.5.0\lib\net472\ReactiveProperty.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty.Core, Version=9.5.0.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.Core.9.5.0\lib\net472\ReactiveProperty.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty.WPF, Version=9.5.0.0, Culture=neutral, PublicKeyToken=0239185f5eb3b356, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.WPF.9.5.0\lib\net472\ReactiveProperty.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.CommandLine, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.CommandLine.2.0.0-beta4.22272.1\lib\netstandard2.0\System.CommandLine.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive, Version=6.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.6.0.0\lib\net472\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Vanara.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.Core.4.0.0\lib\net48\Vanara.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.ComCtl32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.ComCtl32.4.0.0\lib\net48\Vanara.PInvoke.ComCtl32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Cryptography, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Cryptography.4.0.0\lib\net48\Vanara.PInvoke.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Gdi32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Gdi32.4.0.0\lib\net48\Vanara.PInvoke.Gdi32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Kernel32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Kernel32.4.0.0\lib\net48\Vanara.PInvoke.Kernel32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Ole, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Ole.4.0.0\lib\net48\Vanara.PInvoke.Ole.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Rpc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Rpc.4.0.0\lib\net48\Vanara.PInvoke.Rpc.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Security.4.0.0\lib\net48\Vanara.PInvoke.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Shared, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Shared.4.0.0\lib\net48\Vanara.PInvoke.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Shell32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.Shell32.4.0.0\lib\net48\Vanara.PInvoke.Shell32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.ShlwApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.ShlwApi.4.0.0\lib\net48\Vanara.PInvoke.ShlwApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.User32, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vanara.PInvoke.User32.4.0.0\lib\net48\Vanara.PInvoke.User32.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BveFileError.cs" />
+    <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Data\InstallationSettings.cs" />
+    <Compile Include="InstallationTarget.cs" />
+    <Compile Include="Installing\CallerInfo.cs" />
+    <Compile Include="Installing\DirectoryExtensions.cs" />
+    <Compile Include="Installing\ShortcutFactory.cs" />
+    <Compile Include="Models\SdkPageModel.cs" />
+    <Compile Include="ViewModels\ElevationOption.cs" />
+    <Compile Include="Installing\ArchivedPackage.cs" />
+    <Compile Include="Installing\InstallationState.cs" />
+    <Compile Include="Installing\Installer.cs" />
+    <Compile Include="Installing\Permission.cs" />
+    <Compile Include="Installing\FileNamer.cs" />
+    <Compile Include="Installing\Package.cs" />
+    <Compile Include="Installing\PreferenceEditor.cs" />
+    <Compile Include="Installing\WinUser.cs" />
+    <Compile Include="Installing\WinUserCollection.cs" />
+    <Compile Include="Models\AbortedPageModel.cs" />
+    <Compile Include="Models\CompletedPageModel.cs" />
+    <Compile Include="BveFileValidatorBase.cs" />
+    <Compile Include="Models\InstallingPageModel.cs" />
+    <Compile Include="Models\ConfirmPageModel.cs" />
+    <Compile Include="Models\NotLatestVersionPageModel.cs" />
+    <Compile Include="Models\RequiresElevationPageModel.cs" />
+    <Compile Include="Models\SelectBve5PageModel.cs" />
+    <Compile Include="Models\SelectBve6PageModel.cs" />
+    <Compile Include="Models\SelectBveByProcessWindowModel.cs" />
+    <Compile Include="Models\SelectBvePageModelBase.cs" />
+    <Compile Include="Models\SelectScenarioDirectoryPageModel.cs" />
+    <Compile Include="ProcessEnumerator.cs" />
+    <Compile Include="ProcessInfo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="TargetPath.cs" />
+    <Compile Include="Models\WelcomePageModel.cs" />
+    <Compile Include="Models\Navigator.cs" />
+    <Compile Include="Page.cs" />
+    <Compile Include="PageViewModelConverter.cs" />
+    <Compile Include="Releases\BveExVersion.cs" />
+    <Compile Include="Releases\BveExRepositoryHost.cs" />
+    <Compile Include="Releases\ReleaseInfo.cs" />
+    <Compile Include="ViewModels\AbortedPageViewModel.cs" />
+    <Compile Include="ViewModels\CompletedPageViewModel.cs" />
+    <Compile Include="ViewModels\InstallingPageViewModel.cs" />
+    <Compile Include="ViewModels\ConfirmPageViewModel.cs" />
+    <Compile Include="ViewModels\NotLatestVersionPageViewModel.cs" />
+    <Compile Include="ViewModels\PreparingPageViewModel.cs" />
+    <Compile Include="ViewModels\RequiresElevationPageViewModel.cs" />
+    <Compile Include="ViewModels\SdkPageViewModel.cs" />
+    <Compile Include="ViewModels\SelectBve5PageViewModel.cs" />
+    <Compile Include="ViewModels\SelectBve6PageViewModel.cs" />
+    <Compile Include="ViewModels\SelectBveByProcessWindowViewModel.cs" />
+    <Compile Include="ViewModels\SelectBvePageViewModelBase.cs" />
+    <Compile Include="ViewModels\SelectScenarioDirectoryPageViewModel.cs" />
+    <Compile Include="ViewModels\StockIcons.cs" />
+    <Compile Include="Views\AbortedPage.xaml.cs">
+      <DependentUpon>AbortedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompletedPage.xaml.cs">
+      <DependentUpon>CompletedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InstallingPage.xaml.cs">
+      <DependentUpon>InstallingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConfirmPage.xaml.cs">
+      <DependentUpon>ConfirmPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotLatestVersionPage.xaml.cs">
+      <DependentUpon>NotLatestVersionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PreparingPage.xaml.cs">
+      <DependentUpon>PreparingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RequiresElevationPage.xaml.cs">
+      <DependentUpon>RequiresElevationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SdkPage.xaml.cs">
+      <DependentUpon>SdkPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectBve5Page.xaml.cs">
+      <DependentUpon>SelectBve5Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectBve6Page.xaml.cs">
+      <DependentUpon>SelectBve6Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectBveByProcessWindow.xaml.cs">
+      <DependentUpon>SelectBveByProcessWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectScenarioDirectoryPage.xaml.cs">
+      <DependentUpon>SelectScenarioDirectoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AbortedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CompletedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InstallingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\General.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ApplicationInfo.cs" />
+    <Compile Include="ViewModels\IPageViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\WelcomePageViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\ConfirmPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NotLatestVersionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PreparingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RequiresElevationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SdkPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectBve5Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SelectBve6Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectBveByProcessWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectScenarioDirectoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WelcomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Packages\BveEx.zip" />
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+    <EmbeddedResource Include="Packages\Scenarios.zip" />
+    <EmbeddedResource Include="Packages\BveEx.Sdk.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Packages\BveEx.Caller.InputDevice.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Packages\Bve5Config.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.6.8.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.8.0\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.6.8.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.8.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props'))" />
+  </Target>
+</Project>

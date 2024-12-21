@@ -1,10 +1,12 @@
-# AtsEX Setup
+# BveEX Setup
 
-[AtsEX](https://github.com/automatic9045/AtsEX) を簡単に BVE Trainsim 6 / 5 へインストールするためのセットアップウィザードです。
+[BveEX](https://github.com/automatic9045/BveEX) を簡単に BVE Trainsim 6 / 5 へインストールするためのセットアップウィザードです。
 
 ## ライセンス
 
 [The MIT License](LICENSE)
+
+※インストーラー自体のライセンスです。BveEX 本体のライセンスは異なる場合があります。
 
 ## 使用ライブラリ等（アルファベット順）
 

@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="BveEx.Setup.Views.PreparingPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BveEx.Setup.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="236" d:DesignWidth="736">
+    <UserControl.Resources>
+        <ResourceDictionary Source="General.xaml"/>
+    </UserControl.Resources>
+    <DockPanel LastChildFill="False">
+        <ProgressBar DockPanel.Dock="Top" Height="16" IsIndeterminate="True"/>
+    </DockPanel>
+</UserControl>
