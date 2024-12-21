@@ -40,6 +40,18 @@ namespace BveEx.Setup.Installing
             if (!pluginsElement.Elements().Contains(content, new ElementEqualityComparer())) pluginsElement.Add(content);
         }
 
+        public bool RemoveInputDevice(string deviceName)
+        {
+            XElement pluginsElement = Root.Element("InputPlugins");
+            if (pluginsElement is null) return false;
+
+            XElement target = new XElement("string", deviceName);
+            XElement content = pluginsElement.Elements().FirstOrDefault(element => new ElementEqualityComparer().Equals(element, target));
+            content?.Remove();
+
+            return !(content is null);
+        }
+
         public void Save()
         {
             Document.Save(XmlPath);

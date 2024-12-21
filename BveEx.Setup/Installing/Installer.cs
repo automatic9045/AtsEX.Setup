@@ -173,6 +173,7 @@ namespace BveEx.Setup.Installing
                         PreferenceEditor preferenceEditor = PreferenceEditor.TryCreateFromUser(users[i], xmlFileName);
                         if (preferenceEditor is null) return;
 
+                        preferenceEditor.RemoveInputDevice("atsex.caller.inputdevice");
                         preferenceEditor.AddInputDevice("bveex.caller.inputdevice");
                         preferenceEditor.Save();
 
