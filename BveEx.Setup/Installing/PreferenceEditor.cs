@@ -29,9 +29,14 @@ namespace BveEx.Setup.Installing
 
         public void AddInputDevice(string deviceName)
         {
-            XElement content = new XElement("string", deviceName);
-
             XElement pluginsElement = Root.Element("InputPlugins");
+            if (pluginsElement is null)
+            {
+                pluginsElement = new XElement("InputPlugins");
+                Root.Add(pluginsElement);
+            }
+
+            XElement content = new XElement("string", deviceName);
             if (!pluginsElement.Elements().Contains(content, new ElementEqualityComparer())) pluginsElement.Add(content);
         }
 
